@@ -13,27 +13,44 @@
         <div class="header__line"></div>
       </header>
       <main class="content">
-        <section class="profile container">
-          <img src="" alt="" class="avatar profile__avatar" />
+        <section class="profile page__profile container">
+          <img
+            src="./images/profile_image.jpg"
+            alt="фото"
+            class="profile__avatar"
+          />
           <div class="info profile__info">
-            <h1 class="info__name">Жак-Ив Кусто</h1>
+            <div class="name">
+              <h1 class="info__name">Жак-Ив Кусто</h1>
+              <div class="edit-button info__edit-button">
+                <img
+                  src="./images/svg/pan.svg"
+                  alt="кнопка-карандаш"
+                  class="edit-button__img"
+                />
+              </div>
+            </div>
             <h2 class="info__activity">Исследователь океана</h2>
+          </div>
+
+          <div class="add-button">
+            <img src="./images/svg/plus.svg" alt="" class="add-button__img" />
           </div>
         </section>
         <section class="cards container">
           <ul class="cards__list">
-            <li class="cards__item">
+            <li class="card cards__item">
               <img
                 src="./images/karachaevsk.jpg"
                 alt="Карачаевск."
                 class="card__img"
               />
               <div class="card__caption">
-                <h2 class="card__title">Карачаевск ghjghj</h2>
+                <h2 class="card__title">Карачаево-Черкессия</h2>
                 <div class="card__like"></div>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="card cards__item">
               <img
                 src="./images/elbrus.jpg"
                 alt="Гора Эльбрус."
@@ -44,14 +61,14 @@
                 <div class="card__like"></div>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="card cards__item">
               <img src="./images/dombai.jpg" alt="Домбай." class="card__img" />
               <div class="card__caption">
                 <h2 class="card__title">Домбай</h2>
                 <div class="card__like"></div>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="card cards__item">
               <img
                 src="./images/teberda.jpg"
                 alt="Теберда."
@@ -62,7 +79,7 @@
                 <div class="card__like"></div>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="card cards__item">
               <img
                 src="./images/lik-hrista.jpg"
                 alt="Лик Христа."
@@ -70,10 +87,10 @@
               />
               <div class="card__caption">
                 <h2 class="card__title">Лик Христа</h2>
-                <div class="card__like"></div>
+                <div class="card__like card__like_active"></div>
               </div>
             </li>
-            <li class="cards__item">
+            <li class="card cards__item">
               <img src="./images/arhiz.jpg" alt="Архыз." class="card__img" />
               <div class="card__caption">
                 <h2 class="card__title">Архыз</h2>
@@ -83,9 +100,7 @@
           </ul>
         </section>
         <footer class="footer container">
-          <p class="footer__copyright">
-            © 2022 Mesto ghgh Russia Bhbyfhhgjhjghj
-          </p>
+          <p class="footer__copyright">© 2022 Mesto Russia</p>
         </footer>
       </main>
     </div>

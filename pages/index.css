@@ -218,6 +218,18 @@ display: flex;
     
 }
 
+.close-icon {
+    background-image: url(../images/svg/Close_icon.svg);
+    width: 32px;
+    height: 32px;
+    position: relative;
+    bottom: calc(32px + 8px);
+    left: calc(430px + 8px);
+
+    
+    
+}
+
 .popup__container {
     margin: auto;    
     width: 430px;
@@ -229,38 +241,38 @@ display: flex;
 
 .form__container {
     max-width: 358px;
+    
     display: flex;
-    margin: 24px auto 37px;
+    margin: 34px auto 37px;
     flex-direction: column;
 
 }
 
-.form__name {
+.form__item {
     font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
 font-size: 14px;
 line-height: 17px;
-
 color: #000000;
+border: none;
+
 }
+
+.form__name {
+    margin-bottom: 30px;
+    border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
+
+}
+
+
 
 .form__activity {
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
-
-color: #000000;
+    margin-bottom: 48px;
+    border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
 }
-.form__line {
-    width: 358px;
-    opacity: 0.2;
-border: 1px solid #000000;
 
 
-}
 
 .form__heading {
     font-family: 'Inter';
@@ -269,17 +281,24 @@ font-weight: 900;
 font-size: 24px;
 line-height: 29px;
 color: #000000;
+margin: 0 0 54px;
 }
 
-.button-text {
+.button {
     font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
 line-height: 22px;
 text-align: center;
-
 color: #FFFFFF;
+background-color: #000000;
+border-radius: 2px;
+height: 50px;
+margin-bottom: auto;
+border: 0;
+padding: 0;
+
 
 }
 

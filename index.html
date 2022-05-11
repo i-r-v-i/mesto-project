@@ -12,6 +12,7 @@
         <div class="header__logo"></div>
         <div class="header__line"></div>
       </header>
+
       <main class="content">
         <section class="profile page__profile container">
           <img
@@ -19,10 +20,10 @@
             alt="фото"
             class="profile__avatar"
           />
-          <div class="info profile__info">
+          <div class="info">
             <div class="name">
               <h1 class="info__name">Жак-Ив Кусто</h1>
-              <div class="edit-button info__edit-button">
+              <div class="edit-button">
                 <img
                   src="./images/svg/pan.svg"
                   alt="кнопка-карандаш"
@@ -31,6 +32,27 @@
               </div>
             </div>
             <h2 class="info__activity">Исследователь океана</h2>
+          </div>
+
+          <div class="popup popup_opened">
+            <form class="form popup__container">
+              <div class="form__container">
+                <h2 class="form__heading">Редактировать профиль</h2>
+                <fieldset class="form__input">
+                  <input
+                    class="form__item form__name"
+                    type="text"
+                    value="Жак-Ив Кусто"
+                  />
+                  <input
+                    class="form__item form__activity"
+                    type="text"
+                    value="Исследователь океана"
+                  />
+                </fieldset>
+                <button type="button" class="button">Сохранить</button>
+              </div>
+            </form>
           </div>
 
           <div class="add-button">

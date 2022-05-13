@@ -1,0 +1,11 @@
+.edit-button__img {
+    object-fit: contain;
+    margin: auto;
+}
+
+@media screen and (max-width: 320px) {
+    .edit-button__img {
+        width: 7.5px;
+        height: 7.5px;
+    }
+}

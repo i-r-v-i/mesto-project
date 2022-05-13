@@ -17,12 +17,14 @@
         <section class="profile page__profile container">
           <img
             src="./images/profile_image.jpg"
-            alt="фото"
+            alt="фото пользователя"
             class="profile__avatar"
           />
           <div class="info">
-            <div class="name">
+            <div class="info__container">
               <h1 class="info__name">Жак-Ив Кусто</h1>
+
+              <!-- здесь и далее реализовала кнопку через div, так как в теории написано, что button - тег для использования в формах. Верно ли это семантически или лучше использовать button? -->
               <div class="edit-button opacity">
                 <img
                   src="./images/svg/pan.svg"
@@ -61,7 +63,11 @@
           </div>
 
           <div class="add-button opacity">
-            <img src="./images/svg/plus.svg" alt="" class="add-button__img" />
+            <img
+              src="./images/svg/plus.svg"
+              alt="иконка плюсика"
+              class="add-button__img"
+            />
           </div>
         </section>
 

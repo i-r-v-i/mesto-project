@@ -1,0 +1,19 @@
+.close-icon {
+    background-image: url(../../images/svg/Close_icon.svg);
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    bottom: calc(32px + 8px);
+    left: calc(430px + 8px);
+   
+}
+
+@media screen and (max-width: 320px) {
+    .close-icon {
+        width: 20px;
+        height: 20px;
+        bottom: calc(20px + 16px); 
+        left: calc(282px - 16px);
+    }
+}

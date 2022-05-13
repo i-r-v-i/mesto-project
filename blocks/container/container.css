@@ -1,0 +1,11 @@
+.container {
+    padding: 0;
+    box-sizing: border-box;
+        
+}
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 0 19px;
+        
+    }
+}

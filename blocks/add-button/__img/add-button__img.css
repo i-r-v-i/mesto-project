@@ -1,0 +1,19 @@
+.add-button__img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    margin: auto;
+
+}
+
+.add-button__img:hover {
+opacity: 0.6;
+}
+
+
+@media screen and (max-width: 320px) {
+    .add-button__img {
+        width: 16px;
+        height: 16px;
+    }
+}

@@ -10,10 +10,30 @@
         
     }
     
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: 910px) {
+        .page__container {
+            max-width: 720px;    
+            
+        }
+    } 
+
+    @media screen and (max-width: 910px) {
+        .page__container {
+            max-width: 581px;    
+            
+        }
+    } 
+    
+    @media screen and (max-width: 620px) {
+        .page__container {
+            max-width: 382px;    
+            padding: 28px 0 36px;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
         .page__container {
             max-width: 320px;    
             padding: 28px 0 36px;
         }
     }
-    

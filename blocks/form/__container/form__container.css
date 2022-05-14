@@ -1,15 +1,16 @@
 .form__container {
     max-width: 358px;
     display: flex;
-    margin: 34px auto 37px;
+    margin: 34px auto 34px;
     flex-direction: column;
+   
 
 }
 
 @media screen and (max-width: 320px) {
     .form__container {
     max-width: 238px;
-    margin: 25px auto 25px;
+    margin: 24px auto 22px;
   
     }
 }

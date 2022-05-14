@@ -8,9 +8,8 @@
   </head>
   <body class="page">
     <div class="page__container">
-      <header class="header container container_wide">
+      <header class="header container container_width_wide">
         <div class="header__logo"></div>
-        <div class="header__line"></div>
       </header>
 
       <main class="content">
@@ -23,52 +22,23 @@
           <div class="info">
             <div class="info__container">
               <h1 class="info__name">Жак-Ив Кусто</h1>
-
-              <!-- здесь и далее реализовала кнопку через div, так как в теории написано, что button - тег для использования в формах. Верно ли это семантически или лучше использовать button? -->
-              <div class="edit-button opacity">
+              <button class="edit-button opacity" type="button">
                 <img
                   src="./images/svg/pan.svg"
-                  alt="кнопка-карандаш"
+                  alt="фото для кнопки редактирования"
                   class="edit-button__img"
                 />
-              </div>
+              </button>
             </div>
             <h2 class="info__activity">Исследователь океана</h2>
           </div>
-
-          <div class="popup popup_opened">
-            <div class="popup__container">
-              <div class="close-icon opacity"></div>
-              <form class="form">
-                <div class="form__container">
-                  <h2 class="form__heading">Редактировать профиль</h2>
-
-                  <input
-                    class="form__item form__name"
-                    type="text"
-                    placeholder="Имя"
-                    value="Жак-Ив Кусто"
-                  />
-                  <input
-                    class="form__item form__activity"
-                    type="text"
-                    placeholder="О себе"
-                    value="Исследователь океана"
-                  />
-
-                  <button type="button" class="button">Сохранить</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="add-button opacity">
+          <button class="add-button opacity" type="button">
             <img
               src="./images/svg/plus.svg"
               alt="иконка плюсика"
               class="add-button__img"
             />
-          </div>
+          </button>
         </section>
 
         <section class="cards container">
@@ -133,10 +103,35 @@
             </li>
           </ul>
         </section>
-        <footer class="footer container">
-          <p class="footer__copyright">© 2022 Mesto Russia</p>
-        </footer>
       </main>
+      <footer class="footer container">
+        <p class="footer__copyright">© 2022 Mesto Russia</p>
+      </footer>
+      <div class="popup popup_opened">
+        <div class="popup__container">
+          <div class="close-icon opacity"></div>
+          <form class="form" method="POST" name="editForm">
+            <div class="form__container">
+              <h2 class="form__heading">Редактировать профиль</h2>
+
+              <input
+                class="form__item form__item_edit_name"
+                type="text"
+                placeholder="Имя"
+                name="name"
+              />
+              <input
+                class="form__item form__item_edit_activity"
+                type="text"
+                placeholder="О себе"
+                name="activity"
+              />
+
+              <button class="button">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -9,8 +9,16 @@
     white-space: nowrap;
     overflow: hidden;
 }
+@media screen and (max-width: 910px) {
+    .info__activity {
+        text-align: center;
+        margin-top: 9px;
+        margin-bottom: 30px;
+    }
+}
 
-@media screen and (max-width: 320px) {
+
+@media screen and (max-width: 380px) {
     .info__activity {
         max-width: 282px;
         font-size: 14px;

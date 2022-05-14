@@ -6,13 +6,16 @@
     display: flex;
     margin-left: auto;
     box-sizing: border-box;
+    background: #000000;
+    
   
     
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 910px) {
     .add-button {
         width: 282px;
+        margin: auto;
     }
 }
    

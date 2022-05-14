@@ -3,8 +3,8 @@
     background-size: cover;
     width: 32px;
     height: 32px;
-    position: relative;
-    bottom: calc(32px + 8px);
+    position: absolute;
+    bottom: calc(330px + 8px);
     left: calc(430px + 8px);
    
 }
@@ -13,7 +13,6 @@
     .close-icon {
         width: 20px;
         height: 20px;
-        bottom: calc(20px + 16px); 
-        left: calc(282px - 16px);
+        left: calc(282px - 20px);
     }
 }

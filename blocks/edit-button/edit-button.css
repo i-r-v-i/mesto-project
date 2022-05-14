@@ -12,7 +12,7 @@
 
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 620px) {
     .edit-button {
         width: 18px;
         height: 18px;

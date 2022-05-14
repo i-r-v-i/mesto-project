@@ -8,7 +8,7 @@
     margin: 0 0 47px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
     .form__heading {
         font-size: 18px;
         line-height: 22px;

@@ -7,7 +7,7 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
     .form__container {
     max-width: 238px;
     margin: 24px auto 22px;

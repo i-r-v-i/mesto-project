@@ -30,7 +30,7 @@
                 />
               </button>
             </div>
-            <h2 class="info__activity">Исследователь океана</h2>
+            <p class="info__activity">Исследователь океана</p>
           </div>
           <button class="add-button opacity" type="button">
             <img
@@ -51,7 +51,7 @@
               />
               <div class="card__caption">
                 <h2 class="card__title">Карачаево-Черкессия</h2>
-                <div class="card__like"></div>
+                <button class="card__like" type="button"></button>
               </div>
             </li>
             <li class="card cards__item">
@@ -62,14 +62,14 @@
               />
               <div class="card__caption">
                 <h2 class="card__title">Гора Эльбрус</h2>
-                <div class="card__like"></div>
+                <button class="card__like" type="button"></button>
               </div>
             </li>
             <li class="card cards__item">
               <img src="./images/dombai.jpg" alt="Домбай." class="card__img" />
               <div class="card__caption">
                 <h2 class="card__title">Домбай</h2>
-                <div class="card__like"></div>
+                <button class="card__like" type="button"></button>
               </div>
             </li>
             <li class="card cards__item">
@@ -80,7 +80,7 @@
               />
               <div class="card__caption">
                 <h2 class="card__title">Теберда</h2>
-                <div class="card__like"></div>
+                <button class="card__like" type="button"></button>
               </div>
             </li>
             <li class="card cards__item">
@@ -91,14 +91,17 @@
               />
               <div class="card__caption">
                 <h2 class="card__title">Лик Христа</h2>
-                <div class="card__like card__like_active"></div>
+                <button
+                  class="card__like card__like_active"
+                  type="button"
+                ></button>
               </div>
             </li>
             <li class="card cards__item">
               <img src="./images/arhiz.jpg" alt="Архыз." class="card__img" />
               <div class="card__caption">
                 <h2 class="card__title">Архыз</h2>
-                <div class="card__like"></div>
+                <button class="card__like" type="button"></button>
               </div>
             </li>
           </ul>
@@ -109,7 +112,7 @@
       </footer>
       <div class="popup popup_opened">
         <div class="popup__container">
-          <div class="close-icon opacity"></div>
+          <button class="close-icon opacity" type="button"></button>
           <form class="form" method="POST" name="editForm">
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
@@ -127,7 +130,7 @@
                 name="activity"
               />
 
-              <button class="button">Сохранить</button>
+              <button class="button" type="submit">Сохранить</button>
             </div>
           </form>
         </div>

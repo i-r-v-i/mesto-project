@@ -6,6 +6,9 @@
     position: absolute;
     bottom: calc(330px + 8px);
     left: calc(430px + 8px);
+    border: none;
+    padding: 0;
+    background-color: transparent;
    
 }
 

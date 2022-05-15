@@ -1,15 +1,15 @@
+/* Спасибо Вам большое за подробные комментарии и разъяснения, за ссылки и статьи! Все приняла к сведению! Извиняюсь за бестолковость и повторные ошибки */
+
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
 @import url(../blocks/page/__header/page__header.css);
 @import url(../blocks/page/__profile/page__profile.css);
-
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/container/container.css);
-@import url(../blocks/container/_wide/container_width_wide.css);
-
+@import url(../blocks/container/_width/container_width_wide.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/info/info.css);
@@ -20,13 +20,10 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/close-icon/close-icon.css);
-
 @import url(../blocks/form/__container/form__container.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__item/_edit/form__item_edit_name.css);
 @import url(../blocks/form/__item/_edit/form__item_edit_activity.css);
-
-
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/button/button.css);
 @import url(../blocks/edit-button/edit-button.css);
@@ -34,10 +31,8 @@
 @import url(../blocks/add-button/add-button.css);
 @import url(../blocks/add-button/__img/add-button__img.css);
 @import url(../blocks/opacity/opacity.css);
-
 @import url(../blocks/cards/__list/cards__list.css);
 @import url(../blocks/cards/__item/cards__item.css);
-
 @import url(../blocks/card/__img/card__img.css);
 @import url(../blocks/card/__caption/card__caption.css);
 @import url(../blocks/card/__title/card__title.css);
@@ -45,11 +40,3 @@
 @import url(../blocks/card/__like/_active/card__like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-
-/* @media screen and (max-width: 910px) {
-.cards {
-
-max-width: 581px;
-
-}
-} */

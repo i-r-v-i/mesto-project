@@ -1,5 +1,3 @@
-/* Спасибо Вам большое за подробные комментарии и разъяснения, за ссылки и статьи! Все приняла к сведению! Извиняюсь за бестолковость и повторные ошибки */
-
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 @import url(../blocks/page/page.css);
@@ -17,9 +15,14 @@
 @import url(../blocks/info/__name/info__name.css);
 @import url(../blocks/info/__activity/info__activity.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type/popup_type_zoom.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_type/popup__container_type_zoom.css);
+@import url(../blocks/popup/__img/popup__img.css);
+@import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/close-icon/close-icon.css);
+@import url(../blocks/close-icon/_type/close-icon_type_zoom.css);
 @import url(../blocks/form/__container/form__container.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__item/_edit/form__item_edit_name.css);
@@ -33,10 +36,21 @@
 @import url(../blocks/opacity/opacity.css);
 @import url(../blocks/cards/__list/cards__list.css);
 @import url(../blocks/cards/__item/cards__item.css);
+@import url(../blocks/card/card.css);
 @import url(../blocks/card/__img/card__img.css);
+@import url(../blocks/card/__bin/card__bin.css);
 @import url(../blocks/card/__caption/card__caption.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like/card__like.css);
 @import url(../blocks/card/__like/_active/card__like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+
+
+
+
+
+
+
+

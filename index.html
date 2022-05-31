@@ -43,7 +43,7 @@
 
         <section class="cards container">
           <ul class="cards__list">
-            <li class="card cards__item">
+            <!-- <li class="card cards__item">
               <img
                 src="./images/karachaevsk.jpg"
                 alt="Карачаевск."
@@ -103,16 +103,16 @@
                 <h2 class="card__title">Архыз</h2>
                 <button class="card__like" type="button"></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
       <footer class="footer container">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
-      <div class="popup popup_opened">
+      <div class="popup popup-profile">
         <div class="popup__container">
-          <button class="close-icon opacity" type="button"></button>
+          <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
           <form class="form" method="POST" name="editForm">
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
@@ -122,6 +122,7 @@
                 type="text"
                 placeholder="Имя"
                 name="name"
+                value=""
               />
               <input
                 class="form__item form__item_edit_activity"
@@ -136,5 +137,57 @@
         </div>
       </div>
     </div>
+
+    <div class="popup popup_type_card">
+      <div class="popup__container">
+        <button class="close-icon close-icon_type_card opacity" type="button" aria-label="Закрыть картинку"></button>
+        <form class="form form-image" method="POST" name="editForm">
+          <div class="form__container">
+            <h2 class="form__heading">Новое место</h2>
+
+            <input
+              class="form__item form__item_edit_name form__item_card_name"
+              type="text"
+              placeholder="Название"
+              name="name"
+              
+            />
+            <input
+              class="form__item form__item_edit_activity form__item_card_link"
+              type="text"
+              placeholder="Ссылка на картинку"
+              name="activity"
+            />
+
+            <button class="button" type="submit">Создать</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_type_zoom">
+    <div class="popup__container_type_zoom">
+      <button class="close-icon close-icon_type_zoom opacity" type="button" aria-label="Закрыть картинку"></button>
+      <img
+      src=""
+      alt=""
+      class="popup__img"
+    />
+    <h2 class="popup__title"></h2>
+  </div>
+</div>
+
+    <template id="card">
+      <li class="card cards__item">
+        <img src="" alt="" class="card__img" />
+        <button class="card__bin" type="button"></button>
+        <div class="card__caption">
+          <h2 class="card__title"></h2>
+          <button class="card__like" type="button"></button>
+        </div>
+      </li>
+    </template>
+    <script src="./pages/index.js"></script>
   </body>
 </html>

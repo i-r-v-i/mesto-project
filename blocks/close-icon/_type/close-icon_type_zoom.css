@@ -1,0 +1,17 @@
+.close-icon_type_zoom {
+    bottom: calc(100% + 8px);
+    left: calc(100% + 8px);
+    border: none;
+    padding: 0;
+    background-color: transparent;
+   
+}
+
+@media screen and (max-width: 540px) {
+    .close-icon_type_zoom {
+        width: 20px;
+        height: 20px;
+        bottom: calc(100% + 16px);
+        left: calc(100% + 16px);
+    }
+}

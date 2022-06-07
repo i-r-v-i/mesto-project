@@ -2,4 +2,5 @@
     font-family: Inter, Arial, sans-serif;
     font-style:  normal;
     color: #545454;
+    flex-shrink: 0;
 }

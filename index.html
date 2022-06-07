@@ -43,67 +43,7 @@
 
         <section class="cards container">
           <ul class="cards__list">
-            <!-- <li class="card cards__item">
-              <img
-                src="./images/karachaevsk.jpg"
-                alt="Карачаевск."
-                class="card__img"
-              />
-              <div class="card__caption">
-                <h2 class="card__title">Карачаево-Черкессия</h2>
-                <button class="card__like" type="button"></button>
-              </div>
-            </li>
-            <li class="card cards__item">
-              <img
-                src="./images/elbrus.jpg"
-                alt="Гора Эльбрус."
-                class="card__img"
-              />
-              <div class="card__caption">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button class="card__like" type="button"></button>
-              </div>
-            </li>
-            <li class="card cards__item">
-              <img src="./images/dombai.jpg" alt="Домбай." class="card__img" />
-              <div class="card__caption">
-                <h2 class="card__title">Домбай</h2>
-                <button class="card__like" type="button"></button>
-              </div>
-            </li>
-            <li class="card cards__item">
-              <img
-                src="./images/teberda.jpg"
-                alt="Теберда."
-                class="card__img"
-              />
-              <div class="card__caption">
-                <h2 class="card__title">Теберда</h2>
-                <button class="card__like" type="button"></button>
-              </div>
-            </li>
-            <li class="card cards__item">
-              <img
-                src="./images/lik-hrista.jpg"
-                alt="Лик Христа."
-                class="card__img"
-              />
-              <div class="card__caption">
-                <h2 class="card__title">Лик Христа</h2>
-                <button
-                  class="card__like card__like_active"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-            <li class="card cards__item">
-              <img src="./images/arhiz.jpg" alt="Архыз." class="card__img" />
-              <div class="card__caption">
-                <h2 class="card__title">Архыз</h2>
-                <button class="card__like" type="button"></button>
-              </div>
-            </li> -->
+            
           </ul>
         </section>
       </main>
@@ -119,16 +59,18 @@
 
               <input
                 class="form__item form__item_edit_name"
-                type="text"
+                type="text" 
                 placeholder="Имя"
                 name="name"
                 value=""
+                required
               />
               <input
                 class="form__item form__item_edit_activity"
                 type="text"
                 placeholder="О себе"
                 name="activity"
+                required
               />
 
               <button class="button" type="submit">Сохранить</button>
@@ -154,7 +96,7 @@
             />
             <input
               class="form__item form__item_edit_activity form__item_card_link"
-              type="text"
+              type="url"
               placeholder="Ссылка на картинку"
               name="activity"
             />

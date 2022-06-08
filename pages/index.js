@@ -118,7 +118,8 @@ const createCard = function(data){
   const cardName = cardElement.querySelector('.card__title');
   cardName.textContent = data.name;
   cardImage.src = data.link;
-
+  cardImage.alt = data.name;
+ 
   const cardBin = cardElement.querySelector('.card__bin');
   const cardLike = cardElement.querySelector('.card__like');
 

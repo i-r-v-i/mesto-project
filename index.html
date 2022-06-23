@@ -53,25 +53,36 @@
       <div class="popup popup-profile">
         <div class="popup__container">
           <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
-          <form class="form" method="POST" name="editForm">
+          <form class="form" method="POST" name="editForm" novalidate>
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
+              <label for="" class="form__field">
 
               <input
+                id="name-input"
                 class="form__item form__item_edit_name"
                 type="text" 
                 placeholder="Имя"
                 name="name"
-                value=""
+                minlength="2" 
+                maxlength="40"
                 required
               />
+              <span class="name-input-error input-error"></span>
+            </label>
+            <label for="" class="form__field">
               <input
+                id="activity-input"
                 class="form__item form__item_edit_activity"
                 type="text"
                 placeholder="О себе"
                 name="activity"
+                minlength="2" 
+                maxlength="200"
                 required
               />
+              <span class="activity-input-error input-error"></span> 
+            </label>
 
               <button class="button" type="submit">Сохранить</button>
             </div>
@@ -83,25 +94,36 @@
     <div class="popup popup_type_card">
       <div class="popup__container">
         <button class="close-icon close-icon_type_card opacity" type="button" aria-label="Закрыть картинку"></button>
-        <form class="form form-image" method="POST" name="editForm">
+        <form class="form form-image" method="POST" name="editForm" novalidate>
           <div class="form__container">
             <h2 class="form__heading">Новое место</h2>
+            <label for="" class="form__field">
 
             <input
+              id="cardname-input"
               class="form__item form__item_edit_name form__item_card_name"
               type="text"
               placeholder="Название"
               name="name"
-              
+              minlength="2" 
+              maxlength="30"
+              required
             />
+            <span class="cardname-input-error input-error"></span> 
+            </label>
+            <label for="" class="form__field">
             <input
+              id="link-input"
               class="form__item form__item_edit_activity form__item_card_link"
               type="url"
               placeholder="Ссылка на картинку"
               name="activity"
+              required
             />
+            <span class="link-input-error input-error"></span>
+            </label>
 
-            <button class="button" type="submit">Создать</button>
+            <button class="button" type="submit" >Создать</button>
           </div>
         </form>
       </div>

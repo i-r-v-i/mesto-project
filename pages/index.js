@@ -62,11 +62,33 @@ const cardLinkInput = document.querySelector('.form__item_card_link');
 //функция открытия любого попапа
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
+    //слушатель на esc
+    document.addEventListener('keydown', keyHandler);
+    popup.addEventListener('mousedown', overHandler); 
 }
+
 
 //функция закрытия любого попапа
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler);
+  popup.removeEventListener('mousedown', overHandler);
+}
+
+//функция закрытия попапа по Esc
+function keyHandler(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  }
+}
+
+//функция закрытия попапа по клику на оверлей
+function overHandler(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(popupOpened);
+ }
 }
 
 //слушатель на кнопку открытия попапа редактирования профиля пользователя
@@ -187,3 +209,109 @@ addButtonCard.addEventListener('click', function() {
 closeIconCard.addEventListener('click', function() {
   closePopup(popupForCard);
 })
+
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__item_type_error');
+   // Заменим содержимое span с ошибкой на переданный параметр
+   errorElement.textContent = errorMessage;
+  // Показываем сообщение об ошибке
+  errorElement.classList.add('input-error');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__item_type_error');
+ // Скрываем сообщение об ошибке
+ errorElement.classList.remove('input-error');
+ // Очистим ошибку
+ errorElement.textContent = '';
+};
+
+
+
+
+// Функция, которая проверяет валидность поля
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    // showInputError теперь получает параметром форму, в которой
+    // находится проверяемое поле, и само это поле
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formElement, inputElement);
+  }
+};
+ 
+const toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
+    // сделай кнопку неактивной
+    buttonElement.classList.add('button_disabled');
+  } else {
+        // иначе сделай кнопку активной
+    buttonElement.classList.remove('button_disabled');
+  }
+}; 
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__item'));
+  const buttonElement = formElement.querySelector('.button');
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach(function (inputElement) {
+    // каждому полю добавим обработчик события input
+    inputElement.addEventListener('input', function () {
+      // Внутри колбэка вызовем  checkInputValidity,
+      // передав ей форму и проверяемый элемент
+      checkInputValidity(formElement, inputElement);
+       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
+       toggleButtonState(inputList, buttonElement);
+    });
+  });
+}; 
+
+
+//функция поиска невалидного поля из всех полей
+const hasInvalidInput = (inputList) => {
+  // проходим по этому массиву методом some
+  return inputList.some((inputElement) => {
+        // Если поле не валидно, колбэк вернёт true
+    // Обход массива прекратится и вся функция
+    // hasInvalidInput вернёт true
+
+    return !inputElement.validity.valid;
+  })
+}; 
+
+// функция, запускающая валидацию
+const enableValidation = () => {
+  const formList = document.querySelectorAll('.form');
+  [...formList].forEach((formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+
+  // Для каждой формы вызовем функцию setEventListeners,
+  // передав ей элемент формы
+  setEventListeners(formElement);
+});
+};
+
+// Вызовем функцию валидации
+enableValidation(); 
+
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+// enableValidation({
+//   formElement: '.form__item',
+//   inputElement: '.popup__input',
+//   buttonElement: '.button',
+//   inactiveButtonClass: 'button_disabled',
+//   inputErrorClass: 'input-error',
+//   errorClass: 'form__item_type_error'
+// }); 

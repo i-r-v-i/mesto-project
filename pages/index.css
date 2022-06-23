@@ -47,11 +47,41 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
+.form__field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+}
 
 
+.input-error {
+    position: absolute;
+    top: calc(17px + 7px + 1px + 5px);
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    
+   
+}
 
+.form__item_type_error {
+     border-bottom: #FF0000 1px solid;
+}
 
+.button_disabled {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #000000;
+    opacity: 0.2;
+    cursor: default;
+    color: #000000;
+  }
 
-
-
+  .button_disabled:hover {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: default;
+}
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
+   
     <title>Место</title>
   </head>
   <body class="page">
@@ -15,7 +15,7 @@
       <main class="content">
         <section class="profile page__profile container">
           <img
-            src="./images/profile_image.jpg"
+            src="<%=require('./images/profile_image.jpg')%>"
             alt="фото пользователя"
             class="profile__avatar"
           />
@@ -24,7 +24,7 @@
               <h1 class="info__name">Жак-Ив Кусто</h1>
               <button class="edit-button opacity" type="button">
                 <img
-                  src="./images/svg/pan.svg"
+                  src="<%=require('./images/svg/pan.svg')%>"
                   alt="фото для кнопки редактирования"
                   class="edit-button__img"
                 />
@@ -34,7 +34,7 @@
           </div>
           <button class="add-button opacity" type="button">
             <img
-              src="./images/svg/plus.svg"
+              src="<%=require('./images/svg/plus.svg')%>"
               alt="иконка плюсика"
               class="add-button__img"
             />
@@ -152,6 +152,6 @@
         </div>
       </li>
     </template>
-    <script src="./pages/index.js"></script>
+    <script type="module" src="./components/index.js"></script>
   </body>
 </html>

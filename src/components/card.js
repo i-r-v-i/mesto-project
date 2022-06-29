@@ -94,13 +94,6 @@ initialCards.forEach(function(item) {
 })
 
 
-// функция для редактирования профиля и сохранения данных
-const handleProfileFormSubmit = function(evt) {
-    evt.preventDefault();
-    infoName.textContent = nameInput.value;
-    infoActivity.textContent = activityInput.value;
-    closePopup(popupProfile);
-  }
 
 // функция для добавления новой карточки пользователем
 const addNewCard = function(evt) {
@@ -119,9 +112,9 @@ const addNewCard = function(evt) {
      
   }
 
-  export { addNewCard, handleProfileFormSubmit };
+  export { addNewCard };
   import { openPopup, closePopup } from './modal.js';
-  import { infoName, infoActivity, popupCardZoom, nameInput, activityInput, popupProfile, popupForCard } from './index.js';
+  import {  popupCardZoom, popupForCard } from './index.js';
  
   
  

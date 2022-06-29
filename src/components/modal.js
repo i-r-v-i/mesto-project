@@ -31,4 +31,15 @@ function handleEscKey(evt) {
   };
 }
 
-export { openPopup, closePopup };
+// функция для редактирования профиля и сохранения данных
+const handleProfileFormSubmit = function(evt) {
+  evt.preventDefault();
+  infoName.textContent = nameInput.value;
+  infoActivity.textContent = activityInput.value;
+  closePopup(popupProfile);
+}
+
+
+
+export { openPopup, closePopup, handleProfileFormSubmit };
+import { infoName, infoActivity, nameInput, activityInput, popupProfile } from './index.js';

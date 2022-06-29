@@ -83,5 +83,5 @@ enableValidation(elements);
 
 export { infoName, infoActivity, popupCardZoom, nameInput, activityInput, popupProfile, popupForCard };
 import { enableValidation, checkInputValidity,  } from './validate.js';
-import { addNewCard, handleProfileFormSubmit } from './card.js';
-import { openPopup, closePopup } from './modal.js';
+import { addNewCard } from './card.js';
+import { openPopup, closePopup, handleProfileFormSubmit } from './modal.js';

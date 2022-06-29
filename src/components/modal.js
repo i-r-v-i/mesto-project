@@ -1,8 +1,8 @@
 //функция закрытия попапа по клику на оверлей
-function overlayHandler(evt) {
-    const popupOpened = document.querySelector('.popup_opened');
+function handleOverlay(evt) {
+   
     if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popupOpened);
+      closePopup(evt.target);
    }
   }
 
@@ -10,24 +10,25 @@ function overlayHandler(evt) {
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
     //слушатель на esc
-    document.addEventListener('keydown', keyHandler);
-    popup.addEventListener('mousedown', overlayHandler); 
+    document.addEventListener('keydown', handleEscKey);
+    popup.addEventListener('mousedown', handleOverlay); 
 }
 
 
 //функция закрытия любого попапа
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
-  popup.removeEventListener('mousedown', overlayHandler);
+  document.removeEventListener('keydown', handleEscKey);
+  popup.removeEventListener('mousedown', handleOverlay);
 }
 
 //функция закрытия попапа по Esc
-function keyHandler(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
+function handleEscKey(evt) {
+   
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
-  }
+  };
 }
 
 export { openPopup, closePopup };

@@ -36,6 +36,8 @@ const popupZoomImg = document.querySelector('.popup__img');
 const cardNameInput = document.querySelector('.form__item_card_name');
 const cardLinkInput = document.querySelector('.form__item_card_link');
 
+
+
 //функция реализации зума картинки (передаем ее как параметр внутри функции createCard) 
 const handleClickImage = function(data) {
     popupZoomImg.src = data.link;
@@ -93,7 +95,7 @@ initialCards.forEach(function(item) {
 
 
 // функция для редактирования профиля и сохранения данных
-const profileFormSubmit = function(evt) {
+const handleProfileFormSubmit = function(evt) {
     evt.preventDefault();
     infoName.textContent = nameInput.value;
     infoActivity.textContent = activityInput.value;
@@ -105,7 +107,7 @@ const addNewCard = function(evt) {
     evt.preventDefault();
     const cardTitle = cardNameInput.value;
     const cardImg = cardLinkInput.value;
-  
+    
     const cardInfo = {
       name: cardTitle,
       link: cardImg  
@@ -114,9 +116,12 @@ const addNewCard = function(evt) {
     renderCard(cardInfo, cardContainer);
     closePopup(popupForCard);
     evt.target.reset();
-    
+     
   }
 
-  export { addNewCard, profileFormSubmit };
+  export { addNewCard, handleProfileFormSubmit };
   import { openPopup, closePopup } from './modal.js';
   import { infoName, infoActivity, popupCardZoom, nameInput, activityInput, popupProfile, popupForCard } from './index.js';
+ 
+  
+ 

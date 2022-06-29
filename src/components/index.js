@@ -5,12 +5,12 @@ import '../index.css';
 
 // ищем попап для зума картинки
 const popupCardZoom = document.querySelector('.popup_type_zoom');
-const closeIconZoom = document.querySelector('.close-icon_type_zoom');
+
 
 //профиль
 const editButtonProfile = document.querySelector('.edit-button');
 const popupProfile = document.querySelector('.popup-profile');
-const closeIconProfile = document.querySelector('.close-icon');   
+ 
    
 //форма редактирования профиля
 const profileForm = document.querySelector('.form');
@@ -28,14 +28,15 @@ const formImage = document.querySelector('.form-image');
 
 
 //слушатель на кнопку закрытия попапа профиля
-closeIconProfile.addEventListener('click', function () {
-   closePopup(popupProfile);
-})
+const closeButtons = document.querySelectorAll('.close-icon');
 
-//слушатель на кнопку закрытия попапа c зумом картинки
-closeIconZoom.addEventListener('click', function () {
-    closePopup(popupCardZoom);
-})
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап 
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
+
 
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -84,4 +85,5 @@ enableValidation(elements);
 export { infoName, infoActivity, popupCardZoom, nameInput, activityInput, popupProfile, popupForCard };
 import { enableValidation, checkInputValidity,  } from './validate.js';
 import { addNewCard } from './card.js';
-import { openPopup, closePopup, handleProfileFormSubmit } from './modal.js';
+import { handleProfileFormSubmit } from './modal.js';
+import { openPopup, closePopup } from './utils.js';

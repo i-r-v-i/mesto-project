@@ -113,7 +113,7 @@ const addNewCard = function(evt) {
   }
 
   export { addNewCard };
-  import { openPopup, closePopup } from './modal.js';
+  import { openPopup, closePopup } from './utils.js';
   import {  popupCardZoom, popupForCard } from './index.js';
  
   

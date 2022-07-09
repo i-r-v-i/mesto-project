@@ -85,6 +85,7 @@ export const renderCard = function (cardData, container, userId) {
   const card = createCard(cardData, userId, handleChangeLike, handleDeleteCard);
   container.prepend(card);
 };
+
 const newCardButton = document.querySelector(".new-card-button");
 // функция для добавления новой карточки пользователем
 export const addNewCard = function (evt) {
@@ -98,6 +99,8 @@ export const addNewCard = function (evt) {
   addCard({ name: cardTitle, link: cardImg })
     .then((cardData) => {
       renderCard(cardData, cardContainer, userId);
+      closePopup(popupForCard);
+      evt.target.reset();
     })
     .catch((err) => {
       console.log(
@@ -105,9 +108,6 @@ export const addNewCard = function (evt) {
       );
     })
     .finally(() => renderLoading(newCardButton, false, "Создать"));
-
-  closePopup(popupForCard);
-  evt.target.reset();
 };
 
 import { openPopup, closePopup, renderLoading } from "./utils.js";

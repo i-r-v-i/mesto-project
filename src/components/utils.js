@@ -13,6 +13,7 @@ export const closePopup = function (popup) {
   popup.removeEventListener("mousedown", handleOverlay);
 };
 
+//функция по изменению текста на кнопке сабмита
 export const renderLoading = (button, isLoading, text) => {
   if (isLoading) {
     button.textContent = "Сохранение...";

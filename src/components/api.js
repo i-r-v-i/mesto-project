@@ -5,7 +5,7 @@ const config = {
     "Content-Type": "application/json",
   },
 };
-const onRensponce = (res) => {
+const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(res);
 };
 
@@ -13,7 +13,7 @@ const onRensponce = (res) => {
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
-  }).then(onRensponce);
+  }).then(checkResponse);
 };
 //функция, которая осуществляет доставку запроса о данных пользователя
 export function getInfoProfile(data) {
@@ -21,7 +21,7 @@ export function getInfoProfile(data) {
     method: "GET",
     headers: config.headers,
     body: JSON.stringify(data),
-  }).then(onRensponce);
+  }).then(checkResponse);
 }
 // функция, которая получает данные о крточках и пользователе сразу
 
@@ -34,14 +34,14 @@ export function addCard(data) {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify(data),
-  }).then(onRensponce);
+  }).then(checkResponse);
 }
 
 export function removeCard(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(onRensponce);
+  }).then(checkResponse);
 }
 
 export function editProfile(data) {
@@ -49,7 +49,7 @@ export function editProfile(data) {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify(data),
-  }).then(onRensponce);
+  }).then(checkResponse);
 }
 
 export function editAvatar(avatar) {
@@ -57,12 +57,12 @@ export function editAvatar(avatar) {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify(avatar),
-  }).then(onRensponce);
+  }).then(checkResponse);
 }
 
 export function changeLike(cardId, islike) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: islike ? "DELETE" : "PUT",
     headers: config.headers,
-  }).then(onRensponce);
+  }).then(checkResponse);
 }

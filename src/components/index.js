@@ -100,7 +100,7 @@ editButtonProfile.addEventListener("click", function () {
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
-export const elements = {
+const elements = {
   formSelector: ".form",
   inputSelector: ".form__item",
   buttonSelector: ".button",

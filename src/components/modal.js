@@ -37,6 +37,7 @@ export const handleProfileFormSubmit = function (evt) {
 };
 
 const buttonAvatarSubmit = document.querySelector(".button-avatar-submit");
+
 // функция для обновления аватара
 export const handleAvatarFormSubmit = function (evt) {
   evt.preventDefault();
@@ -67,4 +68,3 @@ import {
 } from "./index.js";
 import { closePopup, renderLoading } from "./utils.js";
 import { editProfile, editAvatar } from "./api.js";
-import { elements } from "./index.js";

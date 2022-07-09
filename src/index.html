@@ -14,11 +14,13 @@
 
       <main class="content">
         <section class="profile page__profile container">
+          <button class="button-avatar">
           <img
             src="<%=require('./images/profile_image.jpg')%>"
             alt="фото пользователя"
             class="profile__avatar"
           />
+        </button>
           <div class="info">
             <div class="info__container">
               <h1 class="info__name">Жак-Ив Кусто</h1>
@@ -52,7 +54,7 @@
       </footer>
       <div class="popup popup-profile">
         <div class="popup__container">
-          <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
+          <button class="close-icon opacity" type="button" aria-label="Закрыть попап"></button>
           <form class="form" method="POST" name="editForm" novalidate>
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
@@ -84,7 +86,7 @@
               <span class="activity-input-error input-error"></span> 
             </label>
 
-              <button class="button" type="submit">Сохранить</button>
+              <button class="button button-profile-submit" type="submit">Сохранить</button>
             </div>
           </form>
         </div>
@@ -93,7 +95,7 @@
 
     <div class="popup popup_type_card">
       <div class="popup__container">
-        <button class="close-icon close-icon_type_card opacity" type="button" aria-label="Закрыть картинку"></button>
+        <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
         <form class="form form-image" method="POST" name="editForm" novalidate>
           <div class="form__container">
             <h2 class="form__heading">Новое место</h2>
@@ -123,7 +125,7 @@
             <span class="link-input-error input-error"></span>
             </label>
 
-            <button class="button" type="submit" >Создать</button>
+            <button class="button new-card-button" type="submit" >Создать</button>
           </div>
         </form>
       </div>
@@ -142,13 +144,42 @@
   </div>
 </div>
 
+<div class="popup popup_type_avatar">
+  <div class="popup__container popup__container_type_avatar">
+    <button class="close-icon close-icon_type_avatar opacity" type="button" aria-label="Закрыть модальное окно"></button>
+    <form class="form form-avatar" method="POST" name="editAvatar" novalidate>
+      <div class="form__container">
+        <h2 class="form__heading">Обновить аватар</h2>
+        
+        <label for="" class="form__field">
+        <input
+          id="link-avatar"
+          class="form__item form__item_edit_activity form__item_avatar_link"
+          type="url"
+          placeholder="Ссылка на фото"
+          name="avatar"
+          required
+        />
+        <span class="link-avatar-error input-error"></span>
+        </label>
+
+        <button class="button button-avatar-submit" type="submit" >Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
     <template id="card">
       <li class="card cards__item">
         <img src="" alt="" class="card__img" />
         <button class="card__bin" type="button"></button>
         <div class="card__caption">
           <h2 class="card__title"></h2>
+          <div class="card__likes-container">
           <button class="card__like" type="button"></button>
+          <p class="card__like-count">6</p>
+        </div>
         </div>
       </li>
     </template>

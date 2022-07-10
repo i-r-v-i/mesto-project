@@ -36,7 +36,9 @@ export const handleProfileFormSubmit = function (evt) {
     });
 };
 
-const buttonAvatarSubmit = document.querySelector(".button-avatar-submit");
+export const buttonAvatarSubmit = document.querySelector(
+  ".button-avatar-submit"
+);
 
 // функция для обновления аватара
 export const handleAvatarFormSubmit = function (evt) {
@@ -46,6 +48,7 @@ export const handleAvatarFormSubmit = function (evt) {
     .then((dataFromServer) => {
       profileAvatar.src = dataFromServer.avatar;
       closePopup(popupForAvatar);
+      evt.target.reset();
     })
     .catch((err) => {
       console.log(

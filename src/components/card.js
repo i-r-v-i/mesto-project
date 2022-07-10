@@ -30,7 +30,7 @@ export const updateLikesState = (cardElement, likesArray, userId) => {
   const likeCounter = cardElement.querySelector(".card__like-count");
   likeCounter.textContent = likesArray.length;
 
-  if (isLiked(likesArray, userId, cardElement)) {
+  if (isLiked(likesArray, userId)) {
     cardLike.classList.add("card__like_active");
   } else {
     cardLike.classList.remove("card__like_active");
@@ -86,7 +86,7 @@ export const renderCard = function (cardData, container, userId) {
   container.prepend(card);
 };
 
-const newCardButton = document.querySelector(".new-card-button");
+export const newCardButton = document.querySelector(".new-card-button");
 // функция для добавления новой карточки пользователем
 export const addNewCard = function (evt) {
   evt.preventDefault();

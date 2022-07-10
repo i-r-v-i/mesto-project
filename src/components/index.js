@@ -79,11 +79,12 @@ formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 //слушатель для  открытия попапа добавления новых карточек
 addButtonCard.addEventListener("click", function () {
-  openPopup(popupForCard);
+  openPopup(popupForCard), toggleButtonState(newCardButton, false, elements);
 });
 
 buttonAvatar.addEventListener("click", function () {
-  openPopup(popupForAvatar);
+  openPopup(popupForAvatar),
+    toggleButtonState(buttonAvatarSubmit, false, elements);
 });
 
 //слушатель на кнопку открытия попапа редактирования профиля пользователя
@@ -112,14 +113,23 @@ const elements = {
 // Вызовем функцию валидации
 enableValidation(elements);
 
-import { enableValidation, checkInputValidity } from "./validate.js";
+import {
+  enableValidation,
+  checkInputValidity,
+  toggleButtonState,
+} from "./validate.js";
 import {
   renderCard,
   addNewCard,
   cardContainer,
   updateLikesState,
   clickButtonDelete,
+  newCardButton,
 } from "./card.js";
-import { handleProfileFormSubmit, handleAvatarFormSubmit } from "./modal.js";
+import {
+  handleProfileFormSubmit,
+  handleAvatarFormSubmit,
+  buttonAvatarSubmit,
+} from "./modal.js";
 import { openPopup, closePopup } from "./utils.js";
 import { getAllInfo, changeLike, removeCard } from "./api.js";

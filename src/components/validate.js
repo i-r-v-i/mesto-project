@@ -11,7 +11,7 @@ const hideInputError = (errorElement, inputElement, config) => {
   errorElement.textContent = inputElement.validationMessage;
 };
 
-const toggleButtonState = (button, isActive = false, config) => {
+export const toggleButtonState = (button, isActive = false, config) => {
   if (isActive) {
     // сделать кнопку активной
     button.classList.remove(config.inactiveButtonClass);

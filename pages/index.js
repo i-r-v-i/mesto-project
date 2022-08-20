@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: "Исаакиевский собор",
-    link: "https://images.unsplash.com/photo-1555460285-763ba96917d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHJ1c3NpYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    name: "Санкт-Петербург",
-    link: "https://images.unsplash.com/photo-1560203513-9ae08101e661?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzM0fHxydXNzaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    name: "Рускеала",
-    link: "https://images.unsplash.com/photo-1573156667495-f14c98bc2ebc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTQzfHxydXNzaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    name: "Иркутск",
-    link: "https://images.unsplash.com/photo-1551844931-2436eb1a9bd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzMzfHxydXNzaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    name: "Лениградская область",
-    link: "https://images.unsplash.com/photo-1613736687604-d836c2731176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDI1fHxydXNzaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  },
-  {
-    name: "Байкал",
-    link: "https://images.unsplash.com/photo-1552588354-984f25026b77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDI5fHxydXNzaWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-  },
-];
-
 const popupProfile = document.querySelector(".popup_type_profile");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__activity");
@@ -36,7 +9,7 @@ const nameInput = formElement.querySelector(".form__item_edit_name");
 const jobInput = formElement.querySelector(".form__item_edit_activity");
 const cardsContainer = document.querySelector(".cards__list");
 
-const addNewCardButton = document.querySelector(".add-button");
+const buttonOpenPopupCard = document.querySelector(".add-button");
 const cardNameInput = document.querySelector(".form__item_card_name");
 const cardLinkInput = document.querySelector(".form__item_card_link");
 const formForNewCard = document.querySelector(".form-image");
@@ -101,11 +74,6 @@ function addToContainer(container, { link, name }) {
   container.prepend(card);
 }
 
-// рендер карточек из массива
-initialCards.forEach((item) => {
-  addToContainer(cardsContainer, item);
-});
-
 // функция добавления новой карточки
 function addNewCard(evt) {
   evt.preventDefault();
@@ -114,6 +82,10 @@ function addNewCard(evt) {
     name: cardNameInput.value,
   });
   closePopup(popupNewCard);
+  // не знаю, какой из двух вариантов ниже лучше. Наверно, с ресет?
+  // cardLinkInput.value = "";
+  // cardNameInput.value = "";
+  formForNewCard.reset();
 }
 
 // Обработчик отправки формы редактирования профиля
@@ -143,5 +115,10 @@ closeIcons.forEach((closeIcon) => {
 //слушатели и установка обработчиков событий
 editButton.addEventListener("click", setInfoInProfileInputs);
 formElement.addEventListener("submit", handleProfileFormSubmit);
-addNewCardButton.addEventListener("click", () => openPopup(popupNewCard));
+buttonOpenPopupCard.addEventListener("click", () => openPopup(popupNewCard));
 formForNewCard.addEventListener("submit", addNewCard);
+
+// рендер карточек из массива
+initialCards.forEach((item) => {
+  addToContainer(cardsContainer, item);
+});

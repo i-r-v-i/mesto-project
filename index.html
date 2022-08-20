@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Место</title>
+  </head>
+  <body class="page">
+    <div class="page__container">
+      <header class="header container container_width_wide">
+        <div class="header__logo"></div>
+      </header>
+
+      <main class="content">
+        <section class="profile page__profile container">
+         
+          <img
+            src="./images/profile_image.jpg"
+            alt="фото пользователя"
+            class="profile__avatar"
+          />
+        
+        <div class="profile__about">
+          <div class="profile__container">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="edit-button opacity" type="button" aria-label="Редактировать данные профиля">
+                <img
+                  src="./images/svg/pan.svg"
+                  alt="фото для кнопки редактирования"
+                  class="edit-button__img"
+                />
+              </button>
+            </div>
+            <p class="profile__activity">Исследователь океана</p>
+          </div>
+          <button class="add-button opacity" type="button" aria-label="Добавить новую карточку">
+            <img
+              src="./images/svg/plus.svg"
+              alt="иконка плюсика"
+              class="add-button__img"
+            />
+          </button>
+        </section>
+
+        <section class="cards container">
+          <ul class="cards__list">
+            
+          </ul>
+        </section>
+      </main>
+      <footer class="footer container">
+        <p class="footer__copyright">© 2022 Mesto Russia</p>
+      </footer>
+      
+      
+      <div class="popup popup_type_profile">
+        <div class="popup__container">
+          <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
+          <form class="form" method="POST" name="editForm">
+            <div class="form__container">
+              <h2 class="form__heading">Редактировать профиль</h2>
+              <label for="" class="form__field form__field_number_one">
+              <input
+                class="form__item form__item_edit_name"
+                type="text" 
+                placeholder="Имя"
+                name="name"
+                required
+              />
+            </label>
+            <label for="" class="form__field form__field_number_two">
+              <input
+                class="form__item form__item_edit_activity"
+                type="text"
+                placeholder="О себе"
+                name="activity"
+                required
+              />
+            </label>
+            <button class="button button-profile-submit" type="submit" aria-label="отправить данные">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup popup_type_newcard">
+      <div class="popup__container">
+        <button class="close-icon close-icon_type_card opacity" type="button" aria-label="Закрыть картинку"></button>
+        <form class="form form-image" method="POST" name="editForm">
+          <div class="form__container">
+            <h2 class="form__heading">Новое место</h2>
+            <label for="" class="form__field form__field_number_one">
+            <input
+              class="form__item form__item_card_name"
+              type="text"
+              placeholder="Название"
+              name="placeName"
+              required
+            />
+          </label>
+          <label for="" class="form__field form__field_number_two">
+            <input
+              class="form__item form__item_card_link"
+              type="url"
+              placeholder="Ссылка на картинку"
+              name="placeLink"
+              required
+            />
+          </label>
+
+             <button class="button new-card-button" type="submit" aria-label="отправить данные">Создать</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_type_zoom">
+    <div class="popup__container_type_zoom">
+      <button class="close-icon close-icon_type_zoom opacity" type="button" aria-label="Закрыть картинку"></button>
+      <img
+      src=""
+      alt=""
+      class="popup__img"
+    />
+    <h2 class="popup__title"></h2>
+  </div>
+</div>
+
+    <template id="card">
+      <li class="card cards__item">
+        <img src="" alt="" class="card__img" />
+        <button class="card__bin" type="button" aria-label="удалить карточку"></button>
+        <div class="card__caption">
+          <h2 class="card__title"></h2>
+          <button class="card__like" type="button" aria-label="поставить лайк"></button>
+        </div>
+      </li>
+    </template>
+    <script src="./pages/index.js"></script>
+  </body>
+</html>

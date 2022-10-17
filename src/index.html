@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Место</title>
   </head>
   <body class="page">
@@ -11,22 +10,19 @@
       <header class="header container container_width_wide">
         <div class="header__logo"></div>
       </header>
-
       <main class="content">
-        <section class="profile page__profile container">
-         
+        <section class="profile page__profile container">       
           <img
-            src="./images/profile_image.jpg"
+          src="<%=require('./images/profile_image.jpg')%>"
             alt="фото пользователя"
             class="profile__avatar"
           />
-        
         <div class="profile__about">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button class="edit-button opacity" type="button" aria-label="Редактировать данные профиля">
                 <img
-                  src="./images/svg/pan.svg"
+                  src="<%=require('./images/svg/pan.svg')%>"
                   alt="фото для кнопки редактирования"
                   class="edit-button__img"
                 />
@@ -36,16 +32,14 @@
           </div>
           <button class="add-button opacity" type="button" aria-label="Добавить новую карточку">
             <img
-              src="./images/svg/plus.svg"
+              src="<%=require('./images/svg/plus.svg')%>"
               alt="иконка плюсика"
               class="add-button__img"
             />
           </button>
         </section>
-
         <section class="cards container">
-          <ul class="cards__list">
-            
+          <ul class="cards__list">  
           </ul>
         </section>
       </main>
@@ -53,30 +47,41 @@
         <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
       
-      
       <div class="popup popup_type_profile">
         <div class="popup__container">
           <button class="close-icon opacity" type="button" aria-label="Закрыть картинку"></button>
-          <form class="form" method="POST" name="editForm">
+          <form class="form" method="POST" name="editProfile" novalidate>
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
-              <label for="" class="form__field form__field_number_one">
+              <label for="" class="form__field">
               <input
+                id="name-input"
                 class="form__item form__item_edit_name"
                 type="text" 
                 placeholder="Имя"
                 name="name"
+                minlength="2"
+                maxlength="40"
+                pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$"
+                data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
                 required
               />
+              <span class="name-input-error input-error"></span>
             </label>
-            <label for="" class="form__field form__field_number_two">
+            <label for="" class="form__field">
               <input
+                id="activity-input"
                 class="form__item form__item_edit_activity"
                 type="text"
                 placeholder="О себе"
                 name="activity"
+                minlength="2"
+                maxlength="200"
+                pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$"
+                data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
                 required
               />
+              <span class="activity-input-error input-error"></span>
             </label>
             <button class="button button-profile-submit" type="submit" aria-label="отправить данные">Сохранить</button>
             </div>
@@ -88,29 +93,36 @@
     <div class="popup popup_type_newcard">
       <div class="popup__container">
         <button class="close-icon close-icon_type_card opacity" type="button" aria-label="Закрыть картинку"></button>
-        <form class="form form-image" method="POST" name="cardForm">
+        <form class="form form-image" method="POST" name="cardForm" novalidate>
           <div class="form__container">
             <h2 class="form__heading">Новое место</h2>
-            <label for="" class="form__field form__field_number_one">
+            <label for="" class="form__field">
             <input
+              id="cardname-input"
               class="form__item form__item_card_name"
               type="text"
               placeholder="Название"
               name="placeName"
+              minlength="2"
+              maxlength="30"
+              pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$"
+              data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
               required
             />
+            <span class="cardname-input-error input-error"></span> 
           </label>
-          <label for="" class="form__field form__field_number_two">
+          <label for="" class="form__field">
             <input
+              id="link-input"
               class="form__item form__item_card_link"
               type="url"
               placeholder="Ссылка на картинку"
               name="placeLink"
               required
             />
+            <span class="link-input-error input-error"></span>
           </label>
-
-             <button class="button new-card-button" type="submit" aria-label="отправить данные">Создать</button>
+             <button class="button new-card-button" type="submit" aria-label="отправить данные" disabled>Создать</button>
           </div>
         </form>
       </div>
@@ -139,8 +151,6 @@
         </div>
       </li>
     </template>
-    <script src="./pages/data.js"></script>
-    <script src="./pages/index.js"></script>
-    
+     
   </body>
 </html>

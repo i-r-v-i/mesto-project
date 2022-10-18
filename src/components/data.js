@@ -39,9 +39,9 @@ export const popupProfile = document.querySelector(".popup_type_profile");
 export const profileName = document.querySelector(".profile__name");
 export const profileJob = document.querySelector(".profile__activity");
 export const editButton = document.querySelector(".edit-button");
-export const formElement = document.querySelector(".form");
-export const nameInput = formElement.querySelector(".form__item_edit_name");
-export const jobInput = formElement.querySelector(".form__item_edit_activity");
+export const formProfile = document.forms.editProfile;
+export const nameInput = formProfile.querySelector(".form__item_edit_name");
+export const jobInput = formProfile.querySelector(".form__item_edit_activity");
 
 //добавление карточки
 export const cardsContainer = document.querySelector(".cards__list");

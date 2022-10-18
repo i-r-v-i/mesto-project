@@ -4,34 +4,34 @@ import {
   profileName,
   profileJob,
   popupProfile,
+  formProfile,
   elements,
 } from "./data.js";
 import { openPopup, closePopup } from "./modal.js";
 
 //функция закрытия попапа по Esc
 export function closeByEsc(evt) {
-  const popupOpened = document.querySelector(".popup_opened");
-  if (evt.key === "Escape") {
+   if (evt.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
 }
 
 //функция закрытия попапа по оверлею
 export function closeByOverlay(evt) {
-  const popupOpened = document.querySelector(".popup_opened");
-  if (evt.target.classList.contains("popup_opened")) {
+    if (evt.target.classList.contains("popup_opened")) {
+    const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
 }
 
 // заполнение полей профиля
 export function setInfoInProfileInputs() {
-  const formElement = document.querySelector(".form");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  checkInputValidity(formElement, nameInput, elements);
-  checkInputValidity(formElement, jobInput, elements);
+  checkInputValidity(formProfile, nameInput, elements);
+  checkInputValidity(formProfile, jobInput, elements);
 }
 
 // Обработчик отправки формы редактирования профиля

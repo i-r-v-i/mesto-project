@@ -1,14 +1,9 @@
 import {
   popupCardZoom,
   popupZoomImg,
-  popupZoomTitle,
-  cardsContainer,
-  popupNewCard,
-  cardLinkInput,
-  cardNameInput,
-  formForNewCard,
-} from "./data.js";
-import { openPopup, closePopup } from "./modal.js";
+  popupZoomTitle
+  } from "./data.js";
+import { openPopup } from "./modal.js";
 
 //лайки
 function handleLikeState(evt) {
@@ -29,7 +24,7 @@ function handleClickImage({ link, name }) {
 }
 
 //подготовка разметки для рендеринга карточек
-function getCard({ link, name }) {
+export function getCard({ link, name }) {
   const cardTemplate = document
     .querySelector("#card")
     .content.querySelector(".card");
@@ -50,19 +45,4 @@ function getCard({ link, name }) {
   return cardElement;
 }
 
-//функция добавления разметки карточки в контейнер
-export function addToContainer(container, { link, name }) {
-  const card = getCard({ link, name });
-  container.prepend(card);
-}
 
-// функция добавления новой карточки
-export function addNewCard(evt) {
-  evt.preventDefault();
-  addToContainer(cardsContainer, {
-    link: cardLinkInput.value,
-    name: cardNameInput.value,
-  });
-  closePopup(popupNewCard);
-  formForNewCard.reset();
-}

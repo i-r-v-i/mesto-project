@@ -12,7 +12,7 @@ function hideInputError(formElement, inputElement, config) {
   errorElement.textContent = inputElement.validationMessage;
 }
 
-function checkInputValidity(formElement, inputElement, config) {
+export function checkInputValidity(formElement, inputElement, config) {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -41,7 +41,7 @@ function toogleButtonState(inputList, buttonElement, config) {
   }
 }
 
-function setEventListeners(formElement, config) {
+export function setEventListeners(formElement, config) {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
   );
@@ -56,7 +56,7 @@ function setEventListeners(formElement, config) {
 }
 
 export function enableValidation(config) {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
+   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();

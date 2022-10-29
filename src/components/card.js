@@ -12,19 +12,20 @@ function handleLikeState(evt) {
 
 //удаление карточки
 function handleDeleteCard(evt) {
+  
   evt.target.closest(".card").remove();
 }
 
 //функция зума картинки
-function handleClickImage({ link, name }) {
-  popupZoomTitle.textContent = name;
-  popupZoomImg.src = link;
-  popupZoomImg.alt = name;
+function handleClickImage(cardData) {
+  popupZoomTitle.textContent = cardData.name;
+  popupZoomImg.src = cardData.link;
+  popupZoomImg.alt = cardData.name;
   openPopup(popupCardZoom);
 }
 
 //подготовка разметки для рендеринга карточек
-export function getCard({ link, name }) {
+export function getCard(cardData, userId) {
   const cardTemplate = document
     .querySelector("#card")
     .content.querySelector(".card");
@@ -34,11 +35,16 @@ export function getCard({ link, name }) {
   const cardName = cardElement.querySelector(".card__title");
   const cardBin = cardElement.querySelector(".card__bin");
   const cardLike = cardElement.querySelector(".card__like");
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardName.textContent = name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardName.textContent = cardData.name;
 
-  cardImage.addEventListener("click", () => handleClickImage({ link, name }));
+  //значок корзинки на карточке
+  if (cardData.owner._id !== userId) {
+    cardBin.remove();
+  }
+
+  cardImage.addEventListener("click", () => handleClickImage(cardData));
   cardLike.addEventListener("click", handleLikeState);
   cardBin.addEventListener("click", handleDeleteCard);
 

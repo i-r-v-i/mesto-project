@@ -2,28 +2,18 @@ import {
   nameInput,
   jobInput,
   profileName,
+  profileAvatar,
+  avatarInput,
   profileJob,
   popupProfile,
   formProfile,
   elements,
+  popupForAvatar,
 } from "./data.js";
 import { openPopup, closePopup } from "./modal.js";
+import { checkInputValidity, enableValidation } from "./validate.js";
+import { editProfile, getInfoProfile, editAvatar } from "./api.js";
 
-//функция закрытия попапа по Esc
-export function closeByEsc(evt) {
-   if (evt.key === "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
-    closePopup(popupOpened);
-  }
-}
-
-//функция закрытия попапа по оверлею
-export function closeByOverlay(evt) {
-    if (evt.target.classList.contains("popup_opened")) {
-    const popupOpened = document.querySelector(".popup_opened");
-    closePopup(popupOpened);
-  }
-}
 
 // заполнение полей профиля
 export function setInfoInProfileInputs() {
@@ -34,10 +24,55 @@ export function setInfoInProfileInputs() {
   checkInputValidity(formProfile, jobInput, elements);
 }
 
-// Обработчик отправки формы редактирования профиля
-export function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupProfile);
-}
+// export let userId = null;
+
+// //получение данных профиля с сервера
+// export function setInfoProfileFromServer() {
+// getInfoProfile()
+// .then((userInfoFromServer) => {
+//   profileName.textContent = userInfoFromServer.name;
+//   profileJob.textContent = userInfoFromServer.about;
+//   profileAvatar.src = userInfoFromServer.avatar;
+//   userId = userInfoFromServer._id;
+// })
+// .catch((err) => {
+//   console.log(
+//     `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+//   );
+//   })
+// }
+// // Обработчик отправки формы редактирования профиля
+// export function handleProfileFormSubmit(evt) {
+//   evt.preventDefault();
+//   editProfile({name: nameInput.value, about: jobInput.value})
+//   .then(() => {
+//     setInfoProfileFromServer();
+//     closePopup(popupProfile);
+//     })
+//     // profileName.textContent = dataFromServer.name;
+//     // profileJob.textContent = dataFromServer.about;
+//     // console.log(dataFromServer);
+//     // closePopup(popupProfile);
+  
+//   .catch((err) => {
+//     console.log(
+//       `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+//     );
+//     })
+// }
+
+// export function handleAvatarFormSubmit(evt) {
+//   evt.preventDefault();
+//   editAvatar({avatar: avatarInput.value})
+//   .then(() => {
+//     setInfoProfileFromServer();
+//     closePopup(popupForAvatar);
+//     evt.target.reset();
+//     enableValidation(elements);
+//   })
+//   .catch((err) => {
+//     console.log(
+//       `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+//     );
+//     })
+// }

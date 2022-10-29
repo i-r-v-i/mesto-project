@@ -1,5 +1,3 @@
-import { closeByEsc, closeByOverlay } from "./utils.js";
-
 // функция открытия модального окна
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -12,4 +10,20 @@ export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closeByEsc);
   popup.removeEventListener("mousedown", closeByOverlay);
+}
+
+//функция закрытия попапа по Esc
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+   const popupOpened = document.querySelector(".popup_opened");
+   closePopup(popupOpened);
+ }
+}
+
+//функция закрытия попапа по оверлею
+function closeByOverlay(evt) {
+   if (evt.target.classList.contains("popup_opened")) {
+   const popupOpened = document.querySelector(".popup_opened");
+   closePopup(popupOpened);
+ }
 }

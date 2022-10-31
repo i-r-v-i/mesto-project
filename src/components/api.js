@@ -65,12 +65,11 @@ export function editAvatar(avatar) {
     }).then(checkResponse);
   }
   
-//   fetch(`${config.url}/users/me`, {
-//     headers: config.headers
-//      })
-//   .then((res) => {
-//     return res.json();; // если всё хорошо, получили ответ
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   })
+  export function changeLike(isLike, cardId) {
+    return fetch(`${config.url}/cards/likes/${cardId}`, {
+        method: isLike ? "DELETE" : "PUT",
+        headers: config.headers,
+      }).then(checkResponse);
+  }
+
+  

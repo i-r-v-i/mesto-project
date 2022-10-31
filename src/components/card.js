@@ -4,24 +4,37 @@ import {
   popupZoomTitle
   } from "./data.js";
 import { openPopup } from "./modal.js";
+import { handleDeleteCard, handleLikeState } from "./index.js"
 
-//лайки
-function handleLikeState(evt) {
-  evt.target.classList.toggle("card__like_active");
+function isMyLike(likesArray, userId) {
+  return Boolean(likesArray.find((likesObj) => { return likesObj._id === userId}));
 }
 
-//удаление карточки
-function handleDeleteCard(evt) {
-  
-  evt.target.closest(".card").remove();
+function changeLikeStatus(cardElement, likesArray, userId) {
+  const cardLike = cardElement.querySelector(".card__like");
+if (isMyLike(likesArray, userId)) {
+  cardLike.classList.add("card__like_active");
+  } else {
+  cardLike.classList.remove("card__like_active");
+  }
+}
+
+function updateLikesCount(cardElement, likesArray) {
+  const likeCounter = cardElement.querySelector(".card__like-count");
+  likeCounter.textContent = likesArray.length;
+}
+
+export function updateLikesStatus(cardElement, likesArray, userId) {
+  updateLikesCount(cardElement, likesArray);
+  changeLikeStatus(cardElement, likesArray, userId) 
 }
 
 //функция зума картинки
-function handleClickImage(cardData) {
+function handleClickImage(cardData, popup) {
   popupZoomTitle.textContent = cardData.name;
   popupZoomImg.src = cardData.link;
   popupZoomImg.alt = cardData.name;
-  openPopup(popupCardZoom);
+  openPopup(popup);
 }
 
 //подготовка разметки для рендеринга карточек
@@ -44,9 +57,18 @@ export function getCard(cardData, userId) {
     cardBin.remove();
   }
 
-  cardImage.addEventListener("click", () => handleClickImage(cardData));
-  cardLike.addEventListener("click", handleLikeState);
-  cardBin.addEventListener("click", handleDeleteCard);
+  updateLikesStatus(cardElement, cardData.likes, userId);
+
+  cardImage.addEventListener("click", () => handleClickImage(cardData, 'popup_type_zoom'));
+  cardLike.addEventListener("click", () => {
+    if (cardLike.classList.contains("card__like_active")) {
+      handleLikeState(cardElement, true, cardData._id, userId);
+    } else {
+      handleLikeState(cardElement, false, cardData._id, userId);
+    }
+    });
+  
+  cardBin.addEventListener("click", () => handleDeleteCard(cardElement, cardData._id));
 
   return cardElement;
 }

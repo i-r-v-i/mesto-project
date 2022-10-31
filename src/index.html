@@ -55,7 +55,7 @@
           <form class="form" method="POST" name="editProfile" novalidate>
             <div class="form__container">
               <h2 class="form__heading">Редактировать профиль</h2>
-              <label for="" class="form__field">
+              <label for="name-input" class="form__field">
               <input
                 id="name-input"
                 class="form__item form__item_edit_name"
@@ -70,7 +70,7 @@
               />
               <span class="name-input-error input-error"></span>
             </label>
-            <label for="" class="form__field">
+            <label for="activity-input" class="form__field">
               <input
                 id="activity-input"
                 class="form__item form__item_edit_activity"
@@ -98,7 +98,7 @@
         <form class="form form-image" method="POST" name="cardForm" novalidate>
           <div class="form__container">
             <h2 class="form__heading">Новое место</h2>
-            <label for="" class="form__field">
+            <label for="cardname-input" class="form__field">
             <input
               id="cardname-input"
               class="form__item form__item_card_name"
@@ -113,7 +113,7 @@
             />
             <span class="cardname-input-error input-error"></span> 
           </label>
-          <label for="" class="form__field">
+          <label for="link-input" class="form__field">
             <input
               id="link-input"
               class="form__item form__item_card_link"
@@ -129,10 +129,10 @@
         </form>
       </div>
     </div>
-  </div>
+  
 
   <div class="popup popup_type_zoom">
-    <div class="popup__container popup__container_type_zoom">
+    <div class="popup__container_type_zoom">
       <button class="close-icon close-icon_type_zoom opacity" type="button" aria-label="Закрыть картинку"></button>
       <img
       src=""
@@ -165,7 +165,7 @@
     </form>
   </div>
 </div>
-</div>
+
 
     <template id="card">
       <li class="card cards__item">

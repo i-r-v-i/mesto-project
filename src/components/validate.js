@@ -41,7 +41,7 @@ function toogleButtonState(inputList, buttonElement, config) {
   }
 }
 
-export function setEventListeners(formElement, config) {
+export function setEventListenersForForm(formElement, config) {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
   );
@@ -60,8 +60,8 @@ export function enableValidation(config) {
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-      setEventListeners(formElement, config);
+      setEventListenersForForm(formElement, config);
     });
-    setEventListeners(formElement, config);
+    setEventListenersForForm(formElement, config);
   });
 }

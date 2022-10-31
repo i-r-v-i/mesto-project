@@ -4,6 +4,7 @@ import {
   popupForAvatar,
   buttonAvatarEdit,
   formAvatar,
+  avatarInput,
   profileName,
   profileJob,
   elements,
@@ -16,11 +17,11 @@ import {
   cardLinkInput,
   cardNameInput,
   } from "./data.js";
-import { enableValidation } from "./validate.js";
+import { enableValidation, setEventListenersForForm } from "./validate.js";
 import { setInfoInProfileInputs } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
-import { getCard } from './card.js';
-import { getInfoFromServer, addCard } from "./api.js";
+import { getCard, updateLikesStatus } from './card.js';
+import { getInfoFromServer, addCard, deleteCard, editProfile, getInfoProfile, editAvatar, changeLike } from "./api.js";
 
 //закрытие любого попапа по крестику
 const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
@@ -30,6 +31,28 @@ closeIcons.forEach((closeIcon) => {
     closePopup(popup);
   });
 });
+
+// лайки
+export function handleLikeState(cardElement, isLiked, cardId, userId) {
+  changeLike(isLiked, cardId)
+  .then((dataFromServer) => {
+      updateLikesStatus(cardElement, dataFromServer.likes, userId)
+  })
+  .catch((err) => {
+    console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
+  });
+}
+
+
+//удаление карточки из сервера и ДОМ
+export function handleDeleteCard(cardElement, cardId) {
+  deleteCard(cardId)
+  .then(() => {
+    cardElement.remove();
+    cardElement = null;
+  })
+}
+
 
 //функция добавления разметки карточки в контейнер
 export function addToContainer(container, cardData, userId) {
@@ -41,37 +64,34 @@ export function addToContainer(container, cardData, userId) {
 function addNewCard(evt) {
   evt.preventDefault();
   addCard({link: cardLinkInput.value, name: cardNameInput.value})
-  .then((data) => {
-    addToContainer(cardsContainer, {
-      link: data.link,
-      name: data.name,
-    }, userId);
+  .then((dataFromServer) => {
+    addToContainer(cardsContainer, dataFromServer, userId);
     closePopup(popupNewCard);
-  formForNewCard.reset();
-  enableValidation(elements);
+  evt.target.reset();
+  setEventListenersForForm(evt.target, elements);
   })
 }
 
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", setInfoInProfileInputs);
 formProfile.addEventListener("submit", handleProfileFormSubmit);
-buttonOpenPopupCard.addEventListener("click", () => openPopup(popupNewCard));
+buttonOpenPopupCard.addEventListener("click", () => openPopup('popup_type_newcard'));
 formForNewCard.addEventListener("submit", addNewCard);
-buttonAvatarEdit.addEventListener("click", () => openPopup(popupForAvatar));
+buttonAvatarEdit.addEventListener("click", () => openPopup('popup_type_avatar'));
 formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 export let userId = null;
 
 getInfoFromServer()
 .then(([cardsFromServer, userInfoFromServer]) => {
-  // setInfoProfileFromServer(userInfoFromServer);
   profileName.textContent = userInfoFromServer.name;
   profileJob.textContent = userInfoFromServer.about;
   profileAvatar.src = userInfoFromServer.avatar;
   userId = userInfoFromServer._id;
 
-  cardsFromServer.forEach((card) => {
-      addToContainer(cardsContainer, card, userId);
+  cardsFromServer.reverse().forEach((card) => {
+    addToContainer(cardsContainer, card, userId);   
+   
 })
 })
 .catch((err) => {
@@ -117,7 +137,8 @@ export function handleAvatarFormSubmit(evt) {
     setInfoProfileFromServer();
     closePopup(popupForAvatar);
     evt.target.reset();
-    enableValidation(elements);
+    setEventListenersForForm(evt.target, elements)
+    
   })
   .catch((err) => {
     console.log(
@@ -126,4 +147,4 @@ export function handleAvatarFormSubmit(evt) {
     })
 }
 
-enableValidation(elements);
+ enableValidation(elements);

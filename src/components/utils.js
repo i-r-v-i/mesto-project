@@ -5,18 +5,26 @@ import {
   profileJob,
   popupProfile,
   formProfile,
-  elements
+  enableValidationConfig
 } from "./data.js";
 import { openPopup } from "./modal.js";
 import { checkInputValidity } from "./validate.js";
-// import {  } from "./api.js";
 
 
 // заполнение полей профиля
 export function setInfoInProfileInputs() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  openPopup('popup__title');
-  checkInputValidity(formProfile, nameInput, elements);
-  checkInputValidity(formProfile, jobInput, elements);
+  openPopup(popupProfile);
+  checkInputValidity(formProfile, nameInput, enableValidationConfig);
+  checkInputValidity(formProfile, jobInput, enableValidationConfig);
+}
+
+export function renderLoading(formElement, isLoading, text) {
+  const buttonSbm = formElement.querySelector('.button');
+  if (isLoading) {
+    buttonSbm.textContent = 'Сохранение...';
+  } else {
+    buttonSbm.textContent = text;
+  }
 }

@@ -59,7 +59,7 @@ export function getCard(cardData, userId) {
 
   updateLikesStatus(cardElement, cardData.likes, userId);
 
-  cardImage.addEventListener("click", () => handleClickImage(cardData, 'popup_type_zoom'));
+  cardImage.addEventListener("click", () => handleClickImage(cardData, popupCardZoom));
   cardLike.addEventListener("click", () => {
     if (cardLike.classList.contains("card__like_active")) {
       handleLikeState(cardElement, true, cardData._id, userId);

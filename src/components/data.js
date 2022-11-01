@@ -1,4 +1,4 @@
-export const elements = {
+export const enableValidationConfig = {
   formSelector: ".form",
   inputSelector: ".form__item",
   buttonSelector: ".button",
@@ -30,7 +30,7 @@ export const popupNewCard = document.querySelector(".popup_type_newcard");
 export const buttonOpenPopupCard = document.querySelector(".add-button");
 export const cardNameInput = document.querySelector(".form__item_card_name");
 export const cardLinkInput = document.querySelector(".form__item_card_link");
-export const formForNewCard = document.querySelector(".form-image");
+export const formForNewCard = document.forms.cardForm;
 
 //зум картинки
 export const popupCardZoom = document.querySelector(".popup_type_zoom");

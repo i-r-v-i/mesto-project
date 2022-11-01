@@ -1,13 +1,15 @@
 import "../index.css";
 import {
+  nameInput,
+  jobInput,
   profileAvatar,
   popupForAvatar,
+  popupProfile,
   buttonAvatarEdit,
   formAvatar,
   avatarInput,
   profileName,
   profileJob,
-  elements,
   buttonProfileEdit,
   buttonOpenPopupCard,
   formProfile,
@@ -16,9 +18,10 @@ import {
   popupNewCard,
   cardLinkInput,
   cardNameInput,
+  enableValidationConfig
   } from "./data.js";
 import { enableValidation, setEventListenersForForm } from "./validate.js";
-import { setInfoInProfileInputs } from "./utils.js";
+import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
 import { getCard, updateLikesStatus } from './card.js';
 import { getInfoFromServer, addCard, deleteCard, editProfile, getInfoProfile, editAvatar, changeLike } from "./api.js";
@@ -63,21 +66,30 @@ export function addToContainer(container, cardData, userId) {
 // функция добавления новой карточки
 function addNewCard(evt) {
   evt.preventDefault();
+  renderLoading(evt.target, true, 'Cоздать');
   addCard({link: cardLinkInput.value, name: cardNameInput.value})
   .then((dataFromServer) => {
     addToContainer(cardsContainer, dataFromServer, userId);
     closePopup(popupNewCard);
   evt.target.reset();
-  setEventListenersForForm(evt.target, elements);
+  setEventListenersForForm(evt.target, enableValidationConfig);
+  })
+  .catch((err) => {
+    console.log(
+      `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
+    );
+  })
+  .finally(() => {
+    renderLoading(evt.target, false, 'Cоздать');
   })
 }
 
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", setInfoInProfileInputs);
 formProfile.addEventListener("submit", handleProfileFormSubmit);
-buttonOpenPopupCard.addEventListener("click", () => openPopup('popup_type_newcard'));
+buttonOpenPopupCard.addEventListener("click", () => openPopup(popupNewCard));
 formForNewCard.addEventListener("submit", addNewCard);
-buttonAvatarEdit.addEventListener("click", () => openPopup('popup_type_avatar'));
+buttonAvatarEdit.addEventListener("click", () => openPopup(popupForAvatar));
 formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 export let userId = null;
@@ -118,6 +130,7 @@ getInfoProfile()
 // Обработчик отправки формы редактирования профиля
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(evt.target, true, 'Cохранить');
   editProfile({name: nameInput.value, about: jobInput.value})
   .then(() => {
     setInfoProfileFromServer();
@@ -128,16 +141,20 @@ export function handleProfileFormSubmit(evt) {
       `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
     );
     })
+    .finally(() => {
+      renderLoading(evt.target, false, 'Cохранить');
+    })
 }
 
 export function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(evt.target, true, 'Cохранить');
   editAvatar({avatar: avatarInput.value})
   .then(() => {
     setInfoProfileFromServer();
     closePopup(popupForAvatar);
     evt.target.reset();
-    setEventListenersForForm(evt.target, elements)
+    setEventListenersForForm(evt.target, enableValidationConfig)
     
   })
   .catch((err) => {
@@ -145,6 +162,9 @@ export function handleAvatarFormSubmit(evt) {
       `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
     );
     })
+    .finally(() => {
+      renderLoading(evt.target, false, 'Cохранить');
+    })
 }
 
- enableValidation(elements);
+ enableValidation(enableValidationConfig);

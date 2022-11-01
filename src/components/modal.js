@@ -1,6 +1,5 @@
 // функция открытия модального окна
-export function openPopup(popupSelector) {
-  const popup = document.querySelector(`.${popupSelector}`)
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
   popup.addEventListener("mousedown", closeByOverlay);

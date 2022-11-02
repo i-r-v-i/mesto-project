@@ -6,6 +6,13 @@ import {
 import { openPopup } from "./modal.js";
 import { handleDeleteCard, handleLikeState } from "./index.js"
 
+
+
+export function removeCardfromDOM(cardElement) {
+  cardElement.remove();
+  cardElement = null;
+}
+
 function isMyLike(likesArray, userId) {
   return Boolean(likesArray.find((likesObj) => { return likesObj._id === userId}));
 }

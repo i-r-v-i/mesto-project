@@ -18,12 +18,14 @@ import {
   popupNewCard,
   cardLinkInput,
   cardNameInput,
-  enableValidationConfig
+  buttonNewCardSubmit,
+  enableValidationConfig,
+  buttonAvatarSubmit
   } from "./data.js";
-import { enableValidation, setEventListenersForForm } from "./validate.js";
+import { enableValidation, buttonDisabled } from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
-import { getCard, updateLikesStatus } from './card.js';
+import { getCard, updateLikesStatus, removeCardfromDOM } from './card.js';
 import { getInfoFromServer, addCard, deleteCard, editProfile, getInfoProfile, editAvatar, changeLike } from "./api.js";
 
 //закрытие любого попапа по крестику
@@ -51,8 +53,12 @@ export function handleLikeState(cardElement, isLiked, cardId, userId) {
 export function handleDeleteCard(cardElement, cardId) {
   deleteCard(cardId)
   .then(() => {
-    cardElement.remove();
-    cardElement = null;
+    removeCardfromDOM(cardElement);
+  })
+  .catch((err) => {
+    console.log(
+      `Что-то пошло не так... Ошибка при удалении карточки: ${err}`
+    );
   })
 }
 
@@ -72,7 +78,7 @@ function addNewCard(evt) {
     addToContainer(cardsContainer, dataFromServer, userId);
     closePopup(popupNewCard);
   evt.target.reset();
-  setEventListenersForForm(evt.target, enableValidationConfig);
+  buttonDisabled(buttonNewCardSubmit, enableValidationConfig);
   })
   .catch((err) => {
     console.log(
@@ -154,8 +160,7 @@ export function handleAvatarFormSubmit(evt) {
     setInfoProfileFromServer();
     closePopup(popupForAvatar);
     evt.target.reset();
-    setEventListenersForForm(evt.target, enableValidationConfig)
-    
+    buttonDisabled(buttonAvatarSubmit, enableValidationConfig);
   })
   .catch((err) => {
     console.log(

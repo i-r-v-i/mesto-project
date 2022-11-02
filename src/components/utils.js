@@ -16,8 +16,7 @@ export function setInfoInProfileInputs() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  checkInputValidity(formProfile, nameInput, enableValidationConfig);
-  checkInputValidity(formProfile, jobInput, enableValidationConfig);
+  
 }
 
 export function renderLoading(formElement, isLoading, text) {
@@ -28,3 +27,4 @@ export function renderLoading(formElement, isLoading, text) {
     buttonSbm.textContent = text;
   }
 }
+

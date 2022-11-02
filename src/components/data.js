@@ -31,6 +31,7 @@ export const buttonOpenPopupCard = document.querySelector(".add-button");
 export const cardNameInput = document.querySelector(".form__item_card_name");
 export const cardLinkInput = document.querySelector(".form__item_card_link");
 export const formForNewCard = document.forms.cardForm;
+export const buttonNewCardSubmit = document.querySelector(".new-card-button");
 
 //зум картинки
 export const popupCardZoom = document.querySelector(".popup_type_zoom");

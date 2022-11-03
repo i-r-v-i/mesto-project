@@ -4,7 +4,7 @@ import {
   popupZoomTitle
   } from "./data.js";
 import { openPopup } from "./modal.js";
-import { handleDeleteCard, handleLikeState } from "./index.js"
+// import { handleDeleteCard, handleLikeState } from "./index.js"
 
 
 
@@ -45,7 +45,7 @@ function handleClickImage(cardData, popup) {
 }
 
 //подготовка разметки для рендеринга карточек
-export function getCard(cardData, userId) {
+export function getCard(cardData, userId, handleDeleteCard, handleLikeState) {
   const cardTemplate = document
     .querySelector("#card")
     .content.querySelector(".card");

@@ -64,8 +64,8 @@ export function handleDeleteCard(cardElement, cardId) {
 
 
 //функция добавления разметки карточки в контейнер
-export function addToContainer(container, cardData, userId) {
-  const card = getCard(cardData, userId);
+function addToContainer(container, cardData, userId) {
+  const card = getCard(cardData, userId, handleDeleteCard, handleLikeState);
   container.prepend(card);
 }
 

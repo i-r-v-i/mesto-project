@@ -1,14 +1,14 @@
 // показываем текст ошибки
-function showInputError(formElement, inputElement, config) {
+function showInputError({formElement, inputElement, errorClass}) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(config.errorClass);
+  inputElement.classList.add(errorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
 //скрываем текст ошибки
-function hideInputError(formElement, inputElement, config) {
+function hideInputError({formElement, inputElement, errorClass}) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(config.errorClass);
+  inputElement.classList.remove(errorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 

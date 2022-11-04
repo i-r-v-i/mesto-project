@@ -36,29 +36,29 @@ export function setButtonDisabled({buttonElement, inactiveButtonClass}) {
   buttonElement.disabled = true;
 }
 
-function setbuttonActive({buttonElement, inactiveButtonClass}) {
+function setButtonActive({buttonElement, inactiveButtonClass}) {
   buttonElement.classList.remove(inactiveButtonClass);
   buttonElement.disabled = false;
 }
 
-function toogleButtonState({inputList, buttonElement, config}) {
+function toogleButtonState({inputList, buttonElement, inactiveButtonClass}) {
   if (hasInvalidInput(inputList)) {
-    setButtonDisabled({buttonElement, ...config});
+    setButtonDisabled({buttonElement, inactiveButtonClass});
   } else {
-    setbuttonActive({buttonElement, ...config});
+    setButtonActive({buttonElement, inactiveButtonClass});
   }
 }
 
-export function setEventListenersForForm({formElement, inputSelector, buttonSelector, config}) {
+export function setEventListenersForForm({formElement, inputSelector, buttonSelector, inactiveButtonClass, config}) {
   const inputList = Array.from(
     formElement.querySelectorAll(inputSelector)
   );
-  const buttonSubmit = formElement.querySelector(buttonSelector);
-  toogleButtonState({inputList, buttonSubmit, config});
+  const buttonElement = formElement.querySelector(buttonSelector);
+  toogleButtonState({inputList, buttonElement, inactiveButtonClass});
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement, config);
-      toogleButtonState({inputList, buttonSubmit, config});
+      toogleButtonState({inputList,  buttonElement, inactiveButtonClass});
     });
   });
 }
@@ -68,7 +68,6 @@ export function enableValidation({formSelector, ...config}) {
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-      // setEventListenersForForm(formElement, config); от этого избавляюсь, так?
     });
     setEventListenersForForm({formElement, ...config});
   });

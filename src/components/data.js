@@ -19,7 +19,9 @@ export const jobInput = formProfile.querySelector(".form__item_edit_activity");
 //аватар
 export const profileAvatar = document.querySelector(".profile__avatar");
 export const avatarInput = document.querySelector(".form__item_avatar-link");
-export const buttonAvatarSubmit = document.querySelector(".button-avatar-submit");
+export const buttonAvatarSubmit = document.querySelector(
+  ".button-avatar-submit"
+);
 export const buttonAvatarEdit = document.querySelector(".button-avatar");
 export const formAvatar = document.forms.editAvatar;
 export const popupForAvatar = document.querySelector(".popup_type_avatar");

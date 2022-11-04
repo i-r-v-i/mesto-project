@@ -40,36 +40,34 @@ export function editProfile(data) {
 }
 
 export function addCard(data) {
-    return fetch(`${config.url}/cards`, {
-        method: "POST",
-        headers: config.headers,
-        body: JSON.stringify({
-            name: data.name,
-            link: data.link,
-          }),
-        }).then(checkResponse);
+  return fetch(`${config.url}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: data.name,
+      link: data.link,
+    }),
+  }).then(checkResponse);
 }
 
 export function editAvatar(avatar) {
-    return fetch(`${config.url}/users/me/avatar`, {
-      method: "PATCH",
-      headers: config.headers,
-      body: JSON.stringify(avatar),
-    }).then(checkResponse);
-  }
+  return fetch(`${config.url}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify(avatar),
+  }).then(checkResponse);
+}
 
-  export function deleteCard(cardId) {
-    return fetch(`${config.url}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: config.headers,
-    }).then(checkResponse);
-  }
-  
-  export function changeLike(isLike, cardId) {
-    return fetch(`${config.url}/cards/likes/${cardId}`, {
-        method: isLike ? "DELETE" : "PUT",
-        headers: config.headers,
-      }).then(checkResponse);
-  }
+export function deleteCard(cardId) {
+  return fetch(`${config.url}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+}
 
-  
+export function changeLike(isLike, cardId) {
+  return fetch(`${config.url}/cards/likes/${cardId}`, {
+    method: isLike ? "DELETE" : "PUT",
+    headers: config.headers,
+  }).then(checkResponse);
+}

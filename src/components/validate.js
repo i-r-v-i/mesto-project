@@ -31,21 +31,21 @@ function hasInvalidInput(inputList) {
   });
 }
 
-export function buttonDisabled(buttonElement, config) {
+export function setButtonDisabled(buttonElement, config) {
   buttonElement.classList.add(config.inactiveButtonClass);
   buttonElement.disabled = true;
 }
 
-function buttonActive(buttonElement, config) {
+function setButtonActive(buttonElement, config) {
   buttonElement.classList.remove(config.inactiveButtonClass);
   buttonElement.disabled = false;
 }
 
 function toogleButtonState(inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonDisabled(buttonElement, config);
+    setButtonDisabled(buttonElement, config);
   } else {
-    buttonActive(buttonElement, config);
+    setButtonActive(buttonElement, config);
   }
 }
 
@@ -64,11 +64,10 @@ export function setEventListenersForForm(formElement, config) {
 }
 
 export function enableValidation(config) {
-   const formList = Array.from(document.querySelectorAll(config.formSelector));
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-      setEventListenersForForm(formElement, config);
     });
     setEventListenersForForm(formElement, config);
   });

@@ -19,9 +19,9 @@ export function checkInputValidity(formElement, inputElement, config) {
     inputElement.setCustomValidity("");
   }
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, config);
+    showInputError({formElement, inputElement, ...config});
   } else {
-    hideInputError(formElement, inputElement, config);
+    hideInputError({formElement, inputElement, ...config});
   }
 }
 
@@ -31,45 +31,45 @@ function hasInvalidInput(inputList) {
   });
 }
 
-export function buttonDisabled(buttonElement, config) {
-  buttonElement.classList.add(config.inactiveButtonClass);
+export function setButtonDisabled({buttonElement, inactiveButtonClass}) {
+  buttonElement.classList.add(inactiveButtonClass);
   buttonElement.disabled = true;
 }
 
-function buttonActive(buttonElement, config) {
-  buttonElement.classList.remove(config.inactiveButtonClass);
+function setbuttonActive({buttonElement, inactiveButtonClass}) {
+  buttonElement.classList.remove(inactiveButtonClass);
   buttonElement.disabled = false;
 }
 
-function toogleButtonState(inputList, buttonElement, config) {
+function toogleButtonState({inputList, buttonElement, config}) {
   if (hasInvalidInput(inputList)) {
-    buttonDisabled(buttonElement, config);
+    setButtonDisabled({buttonElement, ...config});
   } else {
-    buttonActive(buttonElement, config);
+    setbuttonActive({buttonElement, ...config});
   }
 }
 
-export function setEventListenersForForm(formElement, config) {
+export function setEventListenersForForm({formElement, inputSelector, buttonSelector, config}) {
   const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
+    formElement.querySelectorAll(inputSelector)
   );
-  const buttonSubmit = formElement.querySelector(config.buttonSelector);
-  toogleButtonState(inputList, buttonSubmit, config);
+  const buttonSubmit = formElement.querySelector(buttonSelector);
+  toogleButtonState({inputList, buttonSubmit, config});
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement, config);
-      toogleButtonState(inputList, buttonSubmit, config);
+      toogleButtonState({inputList, buttonSubmit, config});
     });
   });
 }
 
-export function enableValidation(config) {
-   const formList = Array.from(document.querySelectorAll(config.formSelector));
+export function enableValidation({formSelector, ...config}) {
+   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-      setEventListenersForForm(formElement, config);
+      // setEventListenersForForm(formElement, config); от этого избавляюсь, так?
     });
-    setEventListenersForForm(formElement, config);
+    setEventListenersForForm({formElement, ...config});
   });
 }

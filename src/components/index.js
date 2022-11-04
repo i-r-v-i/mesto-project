@@ -22,7 +22,7 @@ import {
   enableValidationConfig,
   buttonAvatarSubmit
   } from "./data.js";
-import { enableValidation, buttonDisabled } from "./validate.js";
+import { enableValidation, setButtonDisabled } from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
 import { getCard, updateLikesStatus, removeCardfromDOM } from './card.js';
@@ -78,7 +78,7 @@ function addNewCard(evt) {
     addToContainer(cardsContainer, dataFromServer, userId);
     closePopup(popupNewCard);
   evt.target.reset();
-  buttonDisabled(buttonNewCardSubmit, enableValidationConfig);
+  setButtonDisabled({buttonNewCardSubmit, enableValidationConfig});
   })
   .catch((err) => {
     console.log(
@@ -160,7 +160,7 @@ export function handleAvatarFormSubmit(evt) {
     setInfoProfileFromServer();
     closePopup(popupForAvatar);
     evt.target.reset();
-    buttonDisabled(buttonAvatarSubmit, enableValidationConfig);
+    setButtonDisabled({buttonAvatarSubmit, enableValidationConfig});
   })
   .catch((err) => {
     console.log(

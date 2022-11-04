@@ -4,11 +4,9 @@ import {
   profileName,
   profileJob,
   popupProfile,
-  formProfile,
-  enableValidationConfig
 } from "./data.js";
 import { openPopup } from "./modal.js";
-import { checkInputValidity } from "./validate.js";
+
 
 
 // заполнение полей профиля

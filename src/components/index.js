@@ -27,14 +27,13 @@ import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
 import { getCard, updateLikesStatus, removeCardfromDOM } from "./card.js";
 import {
-  getInfoFromServer,
-  addCard,
-  deleteCard,
-  editProfile,
-  getInfoProfile,
-  editAvatar,
-  changeLike,
+    Api
 } from "./api.js";
+
+const api = new Api({
+    token: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
+    url: "https://nomoreparties.co/v1/plus-cohort-16"
+})
 
 //закрытие любого попапа по крестику
 const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
@@ -47,7 +46,7 @@ closeIcons.forEach((closeIcon) => {
 
 // лайки
 export function handleLikeState(cardElement, isLiked, cardId, userId) {
-  changeLike(isLiked, cardId)
+  api.changeLike(isLiked, cardId)
     .then((dataFromServer) => {
       updateLikesStatus(cardElement, dataFromServer.likes, userId);
     })
@@ -58,7 +57,7 @@ export function handleLikeState(cardElement, isLiked, cardId, userId) {
 
 //удаление карточки из сервера и ДОМ
 export function handleDeleteCard(cardElement, cardId) {
-  deleteCard(cardId)
+  api.deleteCard(cardId)
     .then(() => {
       removeCardfromDOM(cardElement);
     })
@@ -79,7 +78,7 @@ export function addToContainer(container, cardData, userId) {
 function addNewCard(evt) {
   evt.preventDefault();
   renderLoading(evt.target, true, "Cоздать");
-  addCard({ link: cardLinkInput.value, name: cardNameInput.value })
+  api.addCard({ link: cardLinkInput.value, name: cardNameInput.value })
     .then((dataFromServer) => {
       addToContainer(cardsContainer, dataFromServer, userId);
       closePopup(popupNewCard);
@@ -106,7 +105,7 @@ formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 export let userId = null;
 
-getInfoFromServer()
+Promise.all([api.getInitialCards(), api.getInfoProfile()])
   .then(([cardsFromServer, userInfoFromServer]) => {
     profileName.textContent = userInfoFromServer.name;
     profileJob.textContent = userInfoFromServer.about;
@@ -125,7 +124,7 @@ getInfoFromServer()
 
 //получение данных профиля с сервера
 export function setInfoProfileFromServer() {
-  getInfoProfile()
+  api.getInfoProfile()
     .then((userInfoFromServer) => {
       profileName.textContent = userInfoFromServer.name;
       profileJob.textContent = userInfoFromServer.about;
@@ -142,7 +141,7 @@ export function setInfoProfileFromServer() {
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   renderLoading(evt.target, true, "Cохранить");
-  editProfile({ name: nameInput.value, about: jobInput.value })
+  api.editProfile({ name: nameInput.value, about: jobInput.value })
     .then(() => {
       setInfoProfileFromServer();
       closePopup(popupProfile);
@@ -160,7 +159,7 @@ export function handleProfileFormSubmit(evt) {
 export function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
   renderLoading(evt.target, true, "Cохранить");
-  editAvatar({ avatar: avatarInput.value })
+  api.editAvatar({ avatar: avatarInput.value })
     .then(() => {
       setInfoProfileFromServer();
       closePopup(popupForAvatar);

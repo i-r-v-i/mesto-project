@@ -1,73 +1,70 @@
-const config = {
-  url: "https://nomoreparties.co/v1/plus-cohort-16",
-  headers: {
-    authorization: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
-    "Content-Type": "application/json",
-  },
-};
+export class Api {
+  constructor({url, token}) {
+    this._url = url;
+    this._headers = {
+      authorization: token,
+      "Content-Type": "application/json",
+    };
+  }
+  _checkResponse(res) {
+    return res.ok
+        ? res.json()
+        : Promise.reject(`Что-то пошло не так: ${res.status}`);
+  }
 
-function checkResponse(res) {
-  return res.ok
-    ? res.json()
-    : Promise.reject(`Что-то пошло не так: ${res.status}`);
-}
+  getInitialCards() {
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-export function getInitialCards() {
-  return fetch(`${config.url}/cards`, {
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  getInfoProfile() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-export function getInfoProfile() {
-  return fetch(`${config.url}/users/me`, {
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  editProfile(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      }),
+    }).then(this._checkResponse);
+  }
 
-export function getInfoFromServer() {
-  return Promise.all([getInitialCards(), getInfoProfile()]);
-}
+  addCard(data) {
+    return fetch(`${this._url}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    }).then(this._checkResponse);
+  }
 
-export function editProfile(data) {
-  return fetch(`${config.url}/users/me`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: data.name,
-      about: data.about,
-    }),
-  }).then(checkResponse);
-}
+  editAvatar(avatar) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(avatar),
+    }).then(this._checkResponse);
+  }
 
-export function addCard(data) {
-  return fetch(`${config.url}/cards`, {
-    method: "POST",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: data.name,
-      link: data.link,
-    }),
-  }).then(checkResponse);
-}
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-export function editAvatar(avatar) {
-  return fetch(`${config.url}/users/me/avatar`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify(avatar),
-  }).then(checkResponse);
-}
-
-export function deleteCard(cardId) {
-  return fetch(`${config.url}/cards/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(checkResponse);
-}
-
-export function changeLike(isLike, cardId) {
-  return fetch(`${config.url}/cards/likes/${cardId}`, {
-    method: isLike ? "DELETE" : "PUT",
-    headers: config.headers,
-  }).then(checkResponse);
+  changeLike(isLike, cardId) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: isLike ? "DELETE" : "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 }

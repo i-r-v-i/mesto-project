@@ -4,7 +4,7 @@
 
 
 export class Card {
-  constructor(cardData, templateSelector, handleCardClick) {
+  constructor( {cardData, handleCardClick, handleDeleteCard,}, templateSelector) {
     this._templateSelector = templateSelector;
     this._cardName = cardData.name;
     this._cardImageLink = cardData.link;
@@ -12,32 +12,32 @@ export class Card {
     this._cardId = cardData._id;
     this._cardOwner = cardData.owner._id;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
-  _getCard(userId) {
+  _getCard() {
     this._cardTemplate = document
       .querySelector(this._templateSelector)
       .content.querySelector(".card");
     this._cardElement = this._cardTemplate.cloneNode(true);
+    this._cardImage = this._card.querySelector(".card__img");
     this._cardBin = this._cardElement.querySelector(".card__bin");
     this._cardLike = this._cardElement.querySelector(".card__like");
     this._likeCounter = this._cardElement.querySelector(".card__like-count");
     // this._likeCounter.textContent = this._cardLikesArray.length;
 
-    this.updateLikesStatus(userId);
-    this._setBinOnCard(userId);
-    this._setEventListeners(); 
-
     return this._cardElement;
   }
 
-  _generateCard() {
+  _generateCard(userId) {
     this._card = this._getCard(); //получаем склонированную карточку для заполнения
-
     this._card.querySelector(".card__title").textContent = this._cardName;
-    this._cardImage = this._card.querySelector(".card__img");
     this._cardImage.src = this._cardImageLink;
     this._cardImage.alt = `Фото ${this._cardName}`;
+
+    this.updateLikesStatus(userId);
+    this._setBinOnCard(userId);
+    this._setEventListeners(); 
 
     return this._card;
   }
@@ -82,6 +82,18 @@ export class Card {
     this._changeLikeStatus(userId);
   }
 
+  _setZoomListener() {
+    this._cardImage.addEventListener("click", this._handleCardClick);
+  }
+
+  _setDeleteListener() {
+    this._cardBin.addEventListener("click", this._handleDeleteCard);
+  }
+
+  _setLikeListener() {
+    this._cardLike.addEventListener("click", () => {});
+  }
+  
   // cardImage.addEventListener("click", () =>
   //   handleClickImage(cardData, popupCardZoom)
   // );
@@ -97,14 +109,10 @@ export class Card {
   //   handleDeleteCard(cardElement, cardData._id)
   // );
 
-
-
-
   _setEventListeners() {
-    
-
-
-    
+    this._setZoomListener();
+    this._setDeleteListener();
+    this._setLikeListener();
   }
 }
 

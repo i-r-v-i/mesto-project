@@ -1,10 +1,5 @@
-// import { popupCardZoom, popupZoomImg, popupZoomTitle } from "./data.js";
-// import { openPopup } from "./modal.js";
-// import { handleDeleteCard, handleLikeState } from "./index.js";
-
-
 export class Card {
-  constructor( {cardData, handleCardClick, handleDeleteCard,}, templateSelector) {
+  constructor( {cardData, handleCardClick, handleDeleteCard, handleChangeLike}, templateSelector) {
     this._templateSelector = templateSelector;
     this._cardName = cardData.name;
     this._cardImageLink = cardData.link;
@@ -13,6 +8,7 @@ export class Card {
     this._cardOwner = cardData.owner._id;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
+    this._handleChangeLike = handleChangeLike;
   }
 
   _getCard() {
@@ -24,7 +20,6 @@ export class Card {
     this._cardBin = this._cardElement.querySelector(".card__bin");
     this._cardLike = this._cardElement.querySelector(".card__like");
     this._likeCounter = this._cardElement.querySelector(".card__like-count");
-    // this._likeCounter.textContent = this._cardLikesArray.length;
 
     return this._cardElement;
   }
@@ -91,9 +86,9 @@ export class Card {
   }
 
   _setLikeListener() {
-    this._cardLike.addEventListener("click", () => {});
+    this._cardLike.addEventListener("click", this._handleChangeLike);
   }
-  
+
   // cardImage.addEventListener("click", () =>
   //   handleClickImage(cardData, popupCardZoom)
   // );

@@ -19,10 +19,6 @@ export class Card {
       .querySelector(this._templateSelector)
       .content.querySelector(".card");
     this._cardElement = this._cardTemplate.cloneNode(true);
-    this._cardElement.querySelector(".card__title").textContent = this._cardName;
-    this._cardImage = this._cardElement.querySelector(".card__img");
-    this._cardImage.src = this._cardImageLink;
-    this._cardImage.alt = this._cardName;
     this._cardBin = this._cardElement.querySelector(".card__bin");
     this._cardLike = this._cardElement.querySelector(".card__like");
     this._likeCounter = this._cardElement.querySelector(".card__like-count");
@@ -33,6 +29,17 @@ export class Card {
     this._setEventListeners(); 
 
     return this._cardElement;
+  }
+
+  _generateCard() {
+    this._card = this._getCard(); //получаем склонированную карточку для заполнения
+
+    this._card.querySelector(".card__title").textContent = this._cardName;
+    this._cardImage = this._card.querySelector(".card__img");
+    this._cardImage.src = this._cardImageLink;
+    this._cardImage.alt = `Фото ${this._cardName}`;
+
+    return this._card;
   }
 
 

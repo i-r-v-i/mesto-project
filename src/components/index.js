@@ -35,6 +35,8 @@ const api = new Api({
     url: "https://nomoreparties.co/v1/plus-cohort-16"
 })
 
+
+
 //закрытие любого попапа по крестику
 const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
 closeIcons.forEach((closeIcon) => {

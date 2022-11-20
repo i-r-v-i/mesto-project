@@ -2,6 +2,53 @@ import { popupCardZoom, popupZoomImg, popupZoomTitle } from "./data.js";
 import { openPopup } from "./modal.js";
 import { handleDeleteCard, handleLikeState } from "./index.js";
 
+
+export class Card {
+  constructor(cardData, templateSelector) {
+    this._templateSelector = templateSelector;
+    this._cardName = cardData.name;
+    this._cardImageLink = cardData.link;
+    this._cardLikesArray = cardData.likes;
+    this._cardId = cardData._id;
+    this._cardOwner = cardData.owner._id;
+    // this._userId = userId;
+  }
+
+  _getCard() {
+    this._cardTemplate = document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".card");
+    this._cardElement = this._cardTemplate.cloneNode(true);
+    this._cardElement.querySelector(".card__title").textContent = this._cardName;
+    this._cardImage = this._cardElement.querySelector(".card__img");
+    this._cardImage.src = this._cardImageLink;
+    this._cardImage.alt = this._cardName;
+    this._cardBin = this._cardElement.querySelector(".card__bin");
+    this._cardLike = this._cardElement.querySelector(".card__like");
+    this._likeCounter = this._cardElement.querySelector(".card__like-count");
+    this._likeCounter.textContent = this._cardLikesArray.length;
+   
+    return this._cardElement;
+  }
+
+  _isMyLike() {
+
+  }
+
+  _setLikeActive() {
+    this._cardLike.classList.add("card__like_active");
+  }
+
+  _unsetLikeActive() {
+    this._cardLike.classList.remove("card__like_active");
+  }
+  _setEventListeners() {
+    
+  }
+}
+
+
+
 export function removeCardfromDOM(cardElement) {
   cardElement.remove();
   cardElement = null;

@@ -31,8 +31,12 @@ export class Card {
     return this._cardElement;
   }
 
-  _isMyLike() {
-
+  _isMyLike(userId) {
+    return Boolean(
+      this._cardLikesArray.find((likesObj) => {
+        return likesObj._id === userId;
+      })
+    );
   }
 
   _setLikeActive() {

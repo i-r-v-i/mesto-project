@@ -21,6 +21,7 @@ import {
   buttonNewCardSubmit,
   enableValidationConfig,
   buttonAvatarSubmit,
+  apiConfig
 } from "./data.js";
 import EnableValidator from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
@@ -30,13 +31,10 @@ import {
     Api
 } from "./api.js";
 
-const api = new Api({
-    token: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
-    url: "https://nomoreparties.co/v1/plus-cohort-16"
-})
+const api = new Api(apiConfig);
 
 //закрытие любого попапа по крестику
-const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
+  const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
 closeIcons.forEach((closeIcon) => {
   const popup = closeIcon.closest(".popup");
   closeIcon.addEventListener("click", () => {
@@ -176,6 +174,7 @@ export function handleAvatarFormSubmit(evt) {
     });
 }
 
-const formValidation = new EnableValidator(enableValidationConfig);
+// const formName = document.querySelector(enableValidationConfig.formSelector[name = cardForm])
+const formValidation = new EnableValidator(enableValidationConfig, );
 
 formValidation.enableValidation();

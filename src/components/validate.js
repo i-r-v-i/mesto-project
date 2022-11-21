@@ -1,92 +1,94 @@
 export default class EnableValidator {
-  constructor(config) {
+  constructor(config, formElement) {
     this._errorClass = config.errorClass;
     this._formList = document.querySelectorAll(config.formSelector);
     this._inputSeletor = config.inputSelector;
     this._buttonSelector = config.buttonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
+    this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._buttonSelector);
   }
 
   //Метод отображения текста ошибки
-  _showInputError(formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _showInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._errorClass);
     errorElement.textContent = inputElement.validationMessage;
   }
 
   //Метод скрытия текста ошибки
-  _hideInputError(formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._errorClass);
     errorElement.textContent = inputElement.validationMessage;
   }
 
   //Метод смены текста и показывания/скрытия ошибки в зависимости от валидности
-  _checkInputValidity(formElement, inputElement) {
+  _checkInputValidity(inputElement) {
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
       inputElement.setCustomValidity("");
     }
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement);
+      this._showInputError(inputElement);
     } else {
-      this._hideInputError(formElement, inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
   //Метод проверки поля ввода на валидность
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
   //Метод смены состояния кнопки ввода на выключенную
-  setButtonDisabled(buttonElement) {
-    buttonElement.classList.add(this._inactiveButtonClass);
-    buttonElement.disabled = true;
+  setButtonDisabled() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
   }
 
   //Метод смены состояния кнопки ввода на активную
-  _setButtonActive(buttonElement) {
-    buttonElement.classList.remove(this._inactiveButtonClass);
-    buttonElement.disabled = false;
+  _setButtonActive() {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.disabled = false;
   }
 
   //Метод смены состояния кнопки ввода (вкл выкл)
-  _toogleButtonState(inputList , buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this.setButtonDisabled(buttonElement);
+  _toogleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.setButtonDisabled();
     } else {
-      this._setButtonActive(buttonElement);
+      this._setButtonActive();
     }
   }
 
   //Метода навешивания слушателей ввода на поля ввода форм
-  _setEventListenersForForm(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector))
-    const buttonElement = formElement.querySelector(this._buttonSelector)
-    this._toogleButtonState(inputList , buttonElement);
-    inputList.forEach((inputElement) => {
+  _setEventListenersForForm() {
+    this._formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    })
+    this._toogleButtonState();
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkInputValidity(formElement, inputElement);
-        this._toogleButtonState(inputList , buttonElement);
+        this._checkInputValidity(inputElement);
+        this._toogleButtonState();
       });
     });
   }
+  
 
   //Метод включения валидации
   enableValidation() {
-    this._formList.forEach((formElement) => {
-      formElement.addEventListener("submit", function (evt) {
-        evt.preventDefault();
-      });
-      this._setEventListenersForForm(formElement);
-    });
-  }
+      this._setEventListenersForForm();
+    };
 }
+
+
 
 // показываем текст ошибки
 // function showInputError(formElement, inputElement, config) {

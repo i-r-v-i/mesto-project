@@ -81,7 +81,7 @@ function addNewCard(evt) {
       addToContainer(cardsContainer, dataFromServer, userId);
       closePopup(popupNewCard);
       evt.target.reset();
-        formValidation.setButtonDisabled(buttonNewCardSubmit);
+        newCardValidation.setButtonDisabled(buttonNewCardSubmit);
     })
     .catch((err) => {
       console.log(
@@ -162,7 +162,7 @@ export function handleAvatarFormSubmit(evt) {
       setInfoProfileFromServer();
       closePopup(popupForAvatar);
       evt.target.reset();
-        formValidation.setButtonDisabled(buttonAvatarSubmit);
+        avatarValidation.setButtonDisabled(buttonAvatarSubmit);
     })
     .catch((err) => {
       console.log(
@@ -174,7 +174,11 @@ export function handleAvatarFormSubmit(evt) {
     });
 }
 
-// const formName = document.querySelector(enableValidationConfig.formSelector[name = cardForm])
-const formValidation = new EnableValidator(enableValidationConfig, );
+const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
+newCardValidation.enableValidation();
 
-formValidation.enableValidation();
+const avatarValidation = new EnableValidator(enableValidationConfig, '.form[name=editAvatar]');
+avatarValidation.enableValidation();
+
+const profileValidation = new EnableValidator(enableValidationConfig, '.form[name=editProfile]');
+profileValidation.enableValidation();

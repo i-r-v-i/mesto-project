@@ -2,12 +2,14 @@ export default class EnableValidator {
   constructor(config, formElement) {
     this._errorClass = config.errorClass;
     this._formList = document.querySelectorAll(config.formSelector);
-    this._inputSeletor = config.inputSelector;
+    this._inputSelector = config.inputSelector;
     this._buttonSelector = config.buttonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
-    this._formElement = formElement;
+    this._formElement = document.querySelector(formElement);
+    console.log(this._formElement)
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    console.log(this._inputList);
     this._buttonElement = this._formElement.querySelector(this._buttonSelector);
   }
 

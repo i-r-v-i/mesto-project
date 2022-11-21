@@ -174,11 +174,22 @@ export function handleAvatarFormSubmit(evt) {
     });
 }
 
-const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
-newCardValidation.enableValidation();
+function setFormValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validation = new EnableValidator(config, formElement);
+    validation.enableValidation();
+  })
+}
+setFormValidation(enableValidationConfig);
 
-const avatarValidation = new EnableValidator(enableValidationConfig, '.form[name=editAvatar]');
-avatarValidation.enableValidation();
 
-const profileValidation = new EnableValidator(enableValidationConfig, '.form[name=editProfile]');
-profileValidation.enableValidation();
+
+// const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
+// newCardValidation.enableValidation();
+
+// const avatarValidation = new EnableValidator(enableValidationConfig, '.form[name=editAvatar]');
+// avatarValidation.enableValidation();
+
+// const profileValidation = new EnableValidator(enableValidationConfig, '.form[name=editProfile]');
+// profileValidation.enableValidation();

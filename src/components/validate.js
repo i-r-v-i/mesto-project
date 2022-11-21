@@ -1,4 +1,4 @@
-export class EnableValidator {
+export default class EnableValidator {
   constructor(config) {
     this._errorClass = config.errorClass;
     this._formList = document.querySelectorAll(config.formSelector);
@@ -57,7 +57,7 @@ export class EnableValidator {
 
   //Метод смены состояния кнопки ввода (вкл выкл)
   _toogleButtonState(inputList , buttonElement) {
-    if (hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput(inputList)) {
       this.setButtonDisabled(buttonElement);
     } else {
       this._setButtonActive(buttonElement);
@@ -66,7 +66,7 @@ export class EnableValidator {
 
   //Метода навешивания слушателей ввода на поля ввода форм
   _setEventListenersForForm(formElement) {
-    const inputList = formElement.querySelectorAll(this._inputSelector);
+    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector))
     const buttonElement = formElement.querySelector(this._buttonSelector)
     this._toogleButtonState(inputList , buttonElement);
     inputList.forEach((inputElement) => {

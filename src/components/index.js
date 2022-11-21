@@ -22,7 +22,7 @@ import {
   enableValidationConfig,
   buttonAvatarSubmit,
 } from "./data.js";
-import { enableValidation, setButtonDisabled } from "./validate.js";
+import EnableValidator from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
 import { getCard, updateLikesStatus, removeCardfromDOM } from "./card.js";
@@ -34,8 +34,6 @@ const api = new Api({
     token: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
     url: "https://nomoreparties.co/v1/plus-cohort-16"
 })
-
-
 
 //закрытие любого попапа по крестику
 const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
@@ -85,7 +83,7 @@ function addNewCard(evt) {
       addToContainer(cardsContainer, dataFromServer, userId);
       closePopup(popupNewCard);
       evt.target.reset();
-      setButtonDisabled(buttonNewCardSubmit, enableValidationConfig);
+        formValidation.setButtonDisabled(buttonNewCardSubmit);
     })
     .catch((err) => {
       console.log(
@@ -166,7 +164,7 @@ export function handleAvatarFormSubmit(evt) {
       setInfoProfileFromServer();
       closePopup(popupForAvatar);
       evt.target.reset();
-      setButtonDisabled(buttonAvatarSubmit, enableValidationConfig);
+        formValidation.setButtonDisabled(buttonAvatarSubmit);
     })
     .catch((err) => {
       console.log(
@@ -178,4 +176,6 @@ export function handleAvatarFormSubmit(evt) {
     });
 }
 
-enableValidation(enableValidationConfig);
+const formValidation = new EnableValidator(enableValidationConfig);
+
+formValidation.enableValidation();

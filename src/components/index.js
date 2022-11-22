@@ -15,7 +15,7 @@ import {
   formProfile,
   formForNewCard,
   cardsContainer,
-  popupNewCard,
+  // popupNewCard,
   cardLinkInput,
   cardNameInput,
   buttonNewCardSubmit,
@@ -25,22 +25,25 @@ import {
 } from "./data.js";
 import EnableValidator from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
-import { openPopup, closePopup } from "./modal.js";
+// import { openPopup, closePopup } from "./modal.js";
+import { Popup } from "./Popup.js"
 import { getCard, updateLikesStatus, removeCardfromDOM } from "./card.js";
 import {
     Api
 } from "./api.js";
 
 const api = new Api(apiConfig);
+const popupNewCard = new Popup(".popup_type_newcard");
 
-//закрытие любого попапа по крестику
-  const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
-closeIcons.forEach((closeIcon) => {
-  const popup = closeIcon.closest(".popup");
-  closeIcon.addEventListener("click", () => {
-    closePopup(popup);
-  });
-});
+
+// //закрытие любого попапа по крестику
+//   const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
+// closeIcons.forEach((closeIcon) => {
+//   const popup = closeIcon.closest(".popup");
+//   closeIcon.addEventListener("click", () => {
+//     closePopup(popup);
+//   });
+// });
 
 // лайки
 export function handleLikeState(cardElement, isLiked, cardId, userId) {
@@ -79,7 +82,7 @@ function addNewCard(evt) {
   api.addCard({ link: cardLinkInput.value, name: cardNameInput.value })
     .then((dataFromServer) => {
       addToContainer(cardsContainer, dataFromServer, userId);
-      closePopup(popupNewCard);
+      popupNewCard.closePopup();
       evt.target.reset();
     })
     .catch((err) => {
@@ -95,7 +98,7 @@ function addNewCard(evt) {
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", setInfoInProfileInputs);
 formProfile.addEventListener("submit", handleProfileFormSubmit);
-buttonOpenPopupCard.addEventListener("click", () => openPopup(popupNewCard));
+buttonOpenPopupCard.addEventListener("click", () => popupNewCard.openPopup());
 formForNewCard.addEventListener("submit", addNewCard);
 buttonAvatarEdit.addEventListener("click", () => openPopup(popupForAvatar));
 formAvatar.addEventListener("submit", handleAvatarFormSubmit);

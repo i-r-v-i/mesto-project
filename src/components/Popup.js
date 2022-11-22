@@ -3,7 +3,7 @@ export class Popup {
     this.popupSelector = popupSelector;
     this.popup = document.querySelector(popupSelector);
     this.closeIcons = Array.from(document.querySelectorAll(".close-icon"));
-    this.popupOpened = document.querySelector(".popup_opened");
+    
   }
 
   openPopup() {
@@ -23,27 +23,16 @@ export class Popup {
     }
   }
   
-  _closeByOverlay = (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      const popupOpened = document.querySelector(".popup_opened");
-      closePopup(popupOpened);
+  _closeByClick = (evt) => {
+    if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("close-icon")) {
+      this.closePopup();
     }
   }
-
-  //закрытие любого попапа по крестику
-  // _setCloseIconListener = () => {
-  //   this.closeIcons.forEach((closeIcon) => {
-  //     popup = closeIcon.closest(this.popupSelector);
-  //     closeIcon.addEventListener("click", () => {
-  //       this.closePopup;
-  //     });
-  //   });
-  // }
 
   setEventListeners() {
     // this._setCloseIconListener();
     document.addEventListener("keydown", this._handleEscClose);
-    this.popup.addEventListener("mousedown", this._closeByOverlay);
+    this.popup.addEventListener("mousedown", this._closeByClick);
   }
 }
 

@@ -73,6 +73,12 @@ export default class EnableValidator {
       evt.preventDefault();
     })
     this._toogleButtonState();
+    this._formElement.addEventListener("reset", () => {
+      setTimeout(() => {
+        this._toogleButtonState();
+        this._hasInvalidInput();
+      }, 0)
+    })
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);

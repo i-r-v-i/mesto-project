@@ -81,7 +81,6 @@ function addNewCard(evt) {
       addToContainer(cardsContainer, dataFromServer, userId);
       closePopup(popupNewCard);
       evt.target.reset();
-        newCardValidation.setButtonDisabled(buttonNewCardSubmit);
     })
     .catch((err) => {
       console.log(
@@ -162,7 +161,6 @@ export function handleAvatarFormSubmit(evt) {
       setInfoProfileFromServer();
       closePopup(popupForAvatar);
       evt.target.reset();
-        avatarValidation.setButtonDisabled(buttonAvatarSubmit);
     })
     .catch((err) => {
       console.log(

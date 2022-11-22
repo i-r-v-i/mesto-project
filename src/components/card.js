@@ -1,3 +1,7 @@
+// import { popupNewCard } from "./index.js";
+import { PopupWithImage } from "./PopupWithImage.js"
+
+
 export class Card {
   constructor( {cardData, handleCardClick, handleDeleteCard, handleChangeLike}, templateSelector) {
     this._templateSelector = templateSelector;
@@ -146,12 +150,12 @@ export function updateLikesStatus(cardElement, likesArray, userId) {
 }
 
 //функция зума картинки
-function handleClickImage(cardData, popup) {
-  popupZoomTitle.textContent = cardData.name;
-  popupZoomImg.src = cardData.link;
-  popupZoomImg.alt = cardData.name;
-  openPopup(popup);
-}
+// function handleClickImage(cardData, popup) {
+//   popupZoomTitle.textContent = cardData.name;
+//   popupZoomImg.src = cardData.link;
+//   popupZoomImg.alt = cardData.name;
+//   openPopup(popup);
+// }
 
 //подготовка разметки для рендеринга карточек
  export function getCard(cardData, userId) {
@@ -175,9 +179,11 @@ function handleClickImage(cardData, popup) {
 
   updateLikesStatus(cardElement, cardData.likes, userId);
 
-  cardImage.addEventListener("click", () =>
-    handleClickImage(cardData, popupCardZoom)
-  );
+  const popupZoomCard = new PopupWithImage(cardData, ".popup_type_zoom");
+
+  cardImage.addEventListener("click", () => popupZoomCard.openPopup());
+
+  
   cardLike.addEventListener("click", () => {
     if (cardLike.classList.contains("card__like_active")) {
       handleLikeState(cardElement, true, cardData._id, userId);

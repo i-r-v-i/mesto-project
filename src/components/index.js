@@ -26,24 +26,16 @@ import {
 import EnableValidator from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 // import { openPopup, closePopup } from "./modal.js";
-import { Popup } from "./Popup.js"
+// import { PopupWithImage } from "./PopupWithImage.js"
+
 import { getCard, updateLikesStatus, removeCardfromDOM } from "./card.js";
 import {
     Api
 } from "./api.js";
 
 const api = new Api(apiConfig);
-const popupNewCard = new Popup(".popup_type_newcard");
 
 
-// //закрытие любого попапа по крестику
-//   const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
-// closeIcons.forEach((closeIcon) => {
-//   const popup = closeIcon.closest(".popup");
-//   closeIcon.addEventListener("click", () => {
-//     closePopup(popup);
-//   });
-// });
 
 // лайки
 export function handleLikeState(cardElement, isLiked, cardId, userId) {

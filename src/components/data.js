@@ -7,6 +7,11 @@ export const enableValidationConfig = {
   errorClass: "form__item_type_error",
 };
 
+export const apiConfig = {
+  token: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
+  url: "https://nomoreparties.co/v1/plus-cohort-16"
+}
+
 //профиль
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const profileName = document.querySelector(".profile__name");

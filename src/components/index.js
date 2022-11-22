@@ -21,8 +21,9 @@ import {
   buttonNewCardSubmit,
   enableValidationConfig,
   buttonAvatarSubmit,
+  apiConfig
 } from "./data.js";
-import { enableValidation, setButtonDisabled } from "./validate.js";
+import EnableValidator from "./validate.js";
 import { setInfoInProfileInputs, renderLoading } from "./utils.js";
 import { openPopup, closePopup } from "./modal.js";
 import { getCard, updateLikesStatus, removeCardfromDOM } from "./card.js";
@@ -30,13 +31,10 @@ import {
     Api
 } from "./api.js";
 
-const api = new Api({
-    token: "34adb4d1-3b9f-4221-8c5f-16ba80991dd4",
-    url: "https://nomoreparties.co/v1/plus-cohort-16"
-})
+const api = new Api(apiConfig);
 
 //закрытие любого попапа по крестику
-const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
+  const closeIcons = Array.from(document.querySelectorAll(".close-icon"));
 closeIcons.forEach((closeIcon) => {
   const popup = closeIcon.closest(".popup");
   closeIcon.addEventListener("click", () => {
@@ -83,7 +81,6 @@ function addNewCard(evt) {
       addToContainer(cardsContainer, dataFromServer, userId);
       closePopup(popupNewCard);
       evt.target.reset();
-      setButtonDisabled(buttonNewCardSubmit, enableValidationConfig);
     })
     .catch((err) => {
       console.log(
@@ -164,7 +161,6 @@ export function handleAvatarFormSubmit(evt) {
       setInfoProfileFromServer();
       closePopup(popupForAvatar);
       evt.target.reset();
-      setButtonDisabled(buttonAvatarSubmit, enableValidationConfig);
     })
     .catch((err) => {
       console.log(
@@ -176,4 +172,22 @@ export function handleAvatarFormSubmit(evt) {
     });
 }
 
-enableValidation(enableValidationConfig);
+function setFormValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validation = new EnableValidator(config, formElement);
+    validation.enableValidation();
+  })
+}
+setFormValidation(enableValidationConfig);
+
+
+
+// const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
+// newCardValidation.enableValidation();
+
+// const avatarValidation = new EnableValidator(enableValidationConfig, '.form[name=editAvatar]');
+// avatarValidation.enableValidation();
+
+// const profileValidation = new EnableValidator(enableValidationConfig, '.form[name=editProfile]');
+// profileValidation.enableValidation();

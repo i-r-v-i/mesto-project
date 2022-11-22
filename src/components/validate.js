@@ -67,7 +67,7 @@ export default class EnableValidator {
     }
   }
 
-  //Метода навешивания слушателей ввода на поля ввода форм
+  //Метод навешивания слушателей ввода на поля ввода форм
   _setEventListenersForForm() {
     this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();

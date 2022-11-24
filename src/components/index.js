@@ -74,12 +74,34 @@ const popupNewCard = new PopupWithForm({
 
 popupNewCard.setEventListeners();
 
+const popupEditPtofile = new PopupWithForm({
+  popupSelector: ".popup_type_profile",
+  handleFormSubmit: () => {
+    api.editProfile({ name: nameInput.value, about: jobInput.value })
+    .then((res) => {
+      userInfo.setUserInfo( { name: res.name, about: res.about });
+      popupEditPtofile.closePopup();
+    })
+    .catch((err) => {
+      console.log(
+        `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+      );
+    })
+    .finally(() => {
+      popupEditPtofile.renderLoading(false, "Cохранить");
+    });
+  }
+})
+
+popupEditPtofile.setEventListeners();
+
+
 const popupForAvatar = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   handleFormSubmit: () => {
     api.editAvatar({ avatar: avatarInput.value })
-        .then(() => {
-          setInfoProfileFromServer();
+        .then((res) => {
+          userInfo.setUserAvatar({ avatar: res.avatar });
           popupForAvatar.closePopup();
           
         })
@@ -150,12 +172,16 @@ export function addToContainer(container, cardData, userId) {
 // }
 
 //слушатели и установка обработчиков событий
-buttonProfileEdit.addEventListener("click", () => userInfo.getUserInfo());
-formProfile.addEventListener("submit", handleProfileFormSubmit);
+buttonProfileEdit.addEventListener("click", () => { 
+  let info = {};
+  info = userInfo.getUserInfo();
+  nameInput.value = info.name;
+  jobInput.value = info.about;
+  popupEditPtofile.openPopup() 
+});
+
 buttonOpenPopupCard.addEventListener("click", () => popupNewCard.openPopup());
-// formForNewCard.addEventListener("submit", () => popupNewCard.handleFormSubmit());
 buttonAvatarEdit.addEventListener("click", () => popupForAvatar.openPopup());
-// formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
 export let userId = null;
 
@@ -196,23 +222,23 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
 //     });
 // }
 // Обработчик отправки формы редактирования профиля
-export function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  renderLoading(evt.target, true, "Cохранить");
-  api.editProfile({ name: nameInput.value, about: jobInput.value })
-    .then(() => {
-      setInfoProfileFromServer();
-      closePopup(popupProfile);
-    })
-    .catch((err) => {
-      console.log(
-        `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
-      );
-    })
-    .finally(() => {
-      renderLoading(evt.target, false, "Cохранить");
-    });
-}
+// export function handleProfileFormSubmit(evt) {
+//   evt.preventDefault();
+//   renderLoading(evt.target, true, "Cохранить");
+//   api.editProfile({ name: nameInput.value, about: jobInput.value })
+//     .then(() => {
+//       setInfoProfileFromServer();
+//       closePopup(popupProfile);
+//     })
+//     .catch((err) => {
+//       console.log(
+//         `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+//       );
+//     })
+//     .finally(() => {
+//       renderLoading(evt.target, false, "Cохранить");
+//     });
+// }
 
 // export function handleAvatarFormSubmit(evt) {
 //   evt.preventDefault();

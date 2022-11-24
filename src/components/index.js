@@ -100,13 +100,19 @@ formForNewCard.addEventListener("submit", addNewCard);
 buttonAvatarEdit.addEventListener("click", () => openPopup(popupForAvatar));
 formAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
+import {UserInfo} from './UserInfo.js'
+
+const userInfo = new UserInfo({profileName, profileJob, profileAvatar})
+
 export let userId = null;
 
 Promise.all([api.getInitialCards(), api.getInfoProfile()])
   .then(([cardsFromServer, userInfoFromServer]) => {
-    profileName.textContent = userInfoFromServer.name;
-    profileJob.textContent = userInfoFromServer.about;
-    profileAvatar.src = userInfoFromServer.avatar;
+    userInfo.setUserInfo({
+      name : userInfoFromServer.name,
+      about : userInfoFromServer.about
+    })
+    userInfo.updateUserInfo();
     userId = userInfoFromServer._id;
 
     cardsFromServer.reverse().forEach((card) => {

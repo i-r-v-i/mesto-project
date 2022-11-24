@@ -8,12 +8,8 @@ import {
   buttonAvatarEdit,
   formAvatar,
   avatarInput,
-  profileName,
-  profileJob,
   buttonProfileEdit,
   buttonOpenPopupCard,
-  formProfile,
-  formForNewCard,
   cardsContainer,
   // popupNewCard,
   cardLinkInput,
@@ -24,13 +20,23 @@ import {
   apiConfig
 } from "./data.js";
 import EnableValidator from "./validate.js";
-import { setInfoInProfileInputs } from "./utils.js";
 import { PopupWithForm } from "./PopupWithForm.js"
-import { getCard, updateLikesStatus } from "./card.js";
+import { Card } from "./card.js";
 import { Api } from "./api.js";
 import UserInfo from "./UserInfo.js";
+import { Section } from "./Section.js"
 
 const api = new Api(apiConfig);
+
+const cardList = new Section( 
+  { items: api.getInitialCards(),
+    renderer: () => {
+      const cardElement = new Card()
+    }
+
+  })
+
+
 
 function setFormValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -151,26 +157,6 @@ export function addToContainer(container, cardData, userId) {
   container.prepend(card);
 }
 
-// // функция добавления новой карточки
-// function addNewCard(evt) {
-//   evt.preventDefault();
-//   renderLoading(evt.target, true, "Cоздать");
-//   api.addCard({ link: cardLinkInput.value, name: cardNameInput.value })
-//     .then((dataFromServer) => {
-//       addToContainer(cardsContainer, dataFromServer, userId);
-//       popupNewCard.closePopup();
-//       evt.target.reset();
-//     })
-//     .catch((err) => {
-//       console.log(
-//         `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
-//       );
-//     })
-//     .finally(() => {
-//       renderLoading(evt.target, false, "Cоздать");
-//     });
-// }
-
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", () => { 
   let info = {};
@@ -195,7 +181,7 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
         avatar: userInfoFromServer.avatar
     })
     userId = userInfoFromServer._id;
-
+    console.log(userId);
     cardsFromServer.reverse().forEach((card) => {
       addToContainer(cardsContainer, card, userId);
     });
@@ -206,57 +192,6 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
     );
   });
 
-//получение данных профиля с сервера
-// export function setInfoProfileFromServer() {
-//   api.getInfoProfile()
-//     .then((userInfoFromServer) => {
-//       profileName.textContent = userInfoFromServer.name;
-//       profileJob.textContent = userInfoFromServer.about;
-//       profileAvatar.src = userInfoFromServer.avatar;
-//       userId = userInfoFromServer._id;
-//     })
-//     .catch((err) => {
-//       console.log(
-//         `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
-//       );
-//     });
-// }
-// Обработчик отправки формы редактирования профиля
-// export function handleProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   renderLoading(evt.target, true, "Cохранить");
-//   api.editProfile({ name: nameInput.value, about: jobInput.value })
-//     .then(() => {
-//       setInfoProfileFromServer();
-//       closePopup(popupProfile);
-//     })
-//     .catch((err) => {
-//       console.log(
-//         `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
-//       );
-//     })
-//     .finally(() => {
-//       renderLoading(evt.target, false, "Cохранить");
-//     });
-// }
 
-// export function handleAvatarFormSubmit(evt) {
-//   evt.preventDefault();
-//   renderLoading(evt.target, true, "Cохранить");
-//   api.editAvatar({ avatar: avatarInput.value })
-//     .then(() => {
-//       setInfoProfileFromServer();
-//       closePopup(popupForAvatar);
-//       evt.target.reset();
-//     })
-//     .catch((err) => {
-//       console.log(
-//         `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
-//       );
-//     })
-//     .finally(() => {
-//       renderLoading(evt.target, false, "Cохранить");
-//     });
-// }
 
 

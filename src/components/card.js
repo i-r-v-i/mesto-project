@@ -82,15 +82,15 @@ export class Card {
   }
 
   _setZoomListener() {
-    this._cardImage.addEventListener("click", this._handleCardClick);
+    this._cardImage.addEventListener("click", () => this._handleCardClick);
   }
 
   _setDeleteListener() {
-    this._cardBin.addEventListener("click", this._handleDeleteCard);
+    this._cardBin.addEventListener("click", () => this._handleDeleteCard);
   }
 
   _setLikeListener() {
-    this._cardLike.addEventListener("click", this._handleChangeLike);
+    this._cardLike.addEventListener("click", () => this._handleChangeLike);
   }
 
   // cardImage.addEventListener("click", () =>
@@ -122,32 +122,32 @@ export class Card {
 //   cardElement = null;
 // }
 
-function isMyLike(likesArray, userId) {
-  return Boolean(
-    likesArray.find((likesObj) => {
-      return likesObj._id === userId;
-    })
-  );
-}
+// function isMyLike(likesArray, userId) {
+//   return Boolean(
+//     likesArray.find((likesObj) => {
+//       return likesObj._id === userId;
+//     })
+//   );
+// }
 
-function changeLikeStatus(cardElement, likesArray, userId) {
-  const cardLike = cardElement.querySelector(".card__like");
-  if (isMyLike(likesArray, userId)) {
-    cardLike.classList.add("card__like_active");
-  } else {
-    cardLike.classList.remove("card__like_active");
-  }
-}
+// function changeLikeStatus(cardElement, likesArray, userId) {
+//   const cardLike = cardElement.querySelector(".card__like");
+//   if (isMyLike(likesArray, userId)) {
+//     cardLike.classList.add("card__like_active");
+//   } else {
+//     cardLike.classList.remove("card__like_active");
+//   }
+// }
 
-function updateLikesCount(cardElement, likesArray) {
-  const likeCounter = cardElement.querySelector(".card__like-count");
-  likeCounter.textContent = likesArray.length;
-}
+// function updateLikesCount(cardElement, likesArray) {
+//   const likeCounter = cardElement.querySelector(".card__like-count");
+//   likeCounter.textContent = likesArray.length;
+// }
 
-export function updateLikesStatus(cardElement, likesArray, userId) {
-  updateLikesCount(cardElement, likesArray);
-  changeLikeStatus(cardElement, likesArray, userId);
-}
+// export function updateLikesStatus(cardElement, likesArray, userId) {
+//   updateLikesCount(cardElement, likesArray);
+//   changeLikeStatus(cardElement, likesArray, userId);
+// }
 
 //функция зума картинки
 // function handleClickImage(cardData, popup) {
@@ -158,43 +158,43 @@ export function updateLikesStatus(cardElement, likesArray, userId) {
 // }
 
 //подготовка разметки для рендеринга карточек
- export function getCard(cardData, userId) {
-  const cardTemplate = document
-    .querySelector("#card")
-    .content.querySelector(".card");
+//  export function getCard(cardData, userId) {
+//   const cardTemplate = document
+//     .querySelector("#card")
+//     .content.querySelector(".card");
 
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__img");
-  const cardName = cardElement.querySelector(".card__title");
-  const cardBin = cardElement.querySelector(".card__bin");
-  const cardLike = cardElement.querySelector(".card__like");
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardName.textContent = cardData.name;
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImage = cardElement.querySelector(".card__img");
+//   const cardName = cardElement.querySelector(".card__title");
+//   const cardBin = cardElement.querySelector(".card__bin");
+//   const cardLike = cardElement.querySelector(".card__like");
+//   cardImage.src = cardData.link;
+//   cardImage.alt = cardData.name;
+//   cardName.textContent = cardData.name;
 
-  //значок корзинки на карточке
-  if (cardData.owner._id !== userId) {
-    cardBin.remove();
-  }
+//   //значок корзинки на карточке
+//   if (cardData.owner._id !== userId) {
+//     cardBin.remove();
+//   }
 
-  updateLikesStatus(cardElement, cardData.likes, userId);
+//   updateLikesStatus(cardElement, cardData.likes, userId);
 
-  const popupZoomCard = new PopupWithImage(cardData, ".popup_type_zoom");
+//   const popupZoomCard = new PopupWithImage(cardData, ".popup_type_zoom");
 
-  cardImage.addEventListener("click", () => popupZoomCard.openPopup());
+//   cardImage.addEventListener("click", () => popupZoomCard.openPopup());
 
   
-  cardLike.addEventListener("click", () => {
-    if (cardLike.classList.contains("card__like_active")) {
-      handleLikeState(cardElement, true, cardData._id, userId);
-    } else {
-      handleLikeState(cardElement, false, cardData._id, userId);
-    }
-  });
+//   cardLike.addEventListener("click", () => {
+//     if (cardLike.classList.contains("card__like_active")) {
+//       handleLikeState(cardElement, true, cardData._id, userId);
+//     } else {
+//       handleLikeState(cardElement, false, cardData._id, userId);
+//     }
+//   });
 
-  cardBin.addEventListener("click", () =>
-    handleDeleteCard(cardElement, cardData._id)
-  );
+//   cardBin.addEventListener("click", () =>
+//     handleDeleteCard(cardElement, cardData._id)
+//   );
 
-  return cardElement;
-}
+//   return cardElement;
+// }

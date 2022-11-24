@@ -28,7 +28,7 @@ import { setInfoInProfileInputs } from "./utils.js";
 import { PopupWithForm } from "./PopupWithForm.js"
 import { getCard, updateLikesStatus } from "./card.js";
 import { Api } from "./api.js";
-import { UserInfo } from "./UserInfo.js";
+import UserInfo from "./UserInfo.js";
 
 const api = new Api(apiConfig);
 
@@ -41,7 +41,7 @@ function setFormValidation(config) {
 }
 setFormValidation(enableValidationConfig);
 
-const userInfo = new UserInfo(".profile__name", ".profile__activity", ".profile__avatar")
+const userInfo = new UserInfo({nameSelector : ".profile__name", aboutSelector: ".profile__activity", avatarSelector: ".profile__avatar"})
 
 // const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
 // newCardValidation.enableValidation();
@@ -161,9 +161,13 @@ export let userId = null;
 
 Promise.all([api.getInitialCards(), api.getInfoProfile()])
   .then(([cardsFromServer, userInfoFromServer]) => {
-    profileName.textContent = userInfoFromServer.name;
-    profileJob.textContent = userInfoFromServer.about;
-    profileAvatar.src = userInfoFromServer.avatar;
+    userInfo.setUserInfo({
+        name: userInfoFromServer.name,
+        about: userInfoFromServer.about
+    })
+    userInfo.setUserAvatar({
+        avatar: userInfoFromServer.avatar
+    })
     userId = userInfoFromServer._id;
 
     cardsFromServer.reverse().forEach((card) => {
@@ -177,20 +181,20 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
   });
 
 //получение данных профиля с сервера
-export function setInfoProfileFromServer() {
-  api.getInfoProfile()
-    .then((userInfoFromServer) => {
-      profileName.textContent = userInfoFromServer.name;
-      profileJob.textContent = userInfoFromServer.about;
-      profileAvatar.src = userInfoFromServer.avatar;
-      userId = userInfoFromServer._id;
-    })
-    .catch((err) => {
-      console.log(
-        `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
-      );
-    });
-}
+// export function setInfoProfileFromServer() {
+//   api.getInfoProfile()
+//     .then((userInfoFromServer) => {
+//       profileName.textContent = userInfoFromServer.name;
+//       profileJob.textContent = userInfoFromServer.about;
+//       profileAvatar.src = userInfoFromServer.avatar;
+//       userId = userInfoFromServer._id;
+//     })
+//     .catch((err) => {
+//       console.log(
+//         `Что-то пошло не так... Ошибка при редактировании профиля: ${err}`
+//       );
+//     });
+// }
 // Обработчик отправки формы редактирования профиля
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();

@@ -1,6 +1,6 @@
 // import { popupNewCard } from "./index.js";
 import { PopupWithImage } from "./PopupWithImage.js"
-
+import {handleDeleteCard} from "./index.js";
 
 export class Card {
   constructor( {cardData, handleCardClick, handleDeleteCard, handleChangeLike}, templateSelector) {
@@ -117,10 +117,10 @@ export class Card {
 
 
 
-export function removeCardfromDOM(cardElement) {
-  cardElement.remove();
-  cardElement = null;
-}
+// export function removeCardfromDOM(cardElement) {
+//   cardElement.remove();
+//   cardElement = null;
+// }
 
 function isMyLike(likesArray, userId) {
   return Boolean(

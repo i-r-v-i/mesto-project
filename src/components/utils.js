@@ -6,7 +6,7 @@ import {
   popupProfile,
   } from "./data.js";
 import { openPopup } from "./modal.js";
-import { checkInputValidity } from "./validate.js";
+
 
 // заполнение полей профиля
 export function setInfoInProfileInputs() {
@@ -15,11 +15,11 @@ export function setInfoInProfileInputs() {
   openPopup(popupProfile);
 }
 
-export function renderLoading(formElement, isLoading, text) {
-  const buttonSbm = formElement.querySelector(".button");
-  if (isLoading) {
-    buttonSbm.textContent = "Сохранение...";
-  } else {
-    buttonSbm.textContent = text;
-  }
-}
+// export function renderLoading(formElement, isLoading, text) {
+//   const buttonSbm = formElement.querySelector(".button");
+//   if (isLoading) {
+//     buttonSbm.textContent = "Сохранение...";
+//   } else {
+//     buttonSbm.textContent = text;
+//   }
+// }

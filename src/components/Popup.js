@@ -1,18 +1,15 @@
 export class Popup {
   constructor(popupSelector) {
-    this.popupSelector = popupSelector;
-    this.popup = document.querySelector(popupSelector);
-    this.closeIcons = Array.from(document.querySelectorAll(".close-icon"));
-    
+    this._popup = document.querySelector(popupSelector);   
   }
 
   openPopup() {
-    this.popup.classList.add("popup_opened");
-    this.setEventListeners();
+    this._popup.classList.add("popup_opened");
+    document.addEventListener("keydown", this._handleEscClose);
   }
 
   closePopup() {
-    this.popup.classList.remove("popup_opened");
+    this._popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
@@ -29,8 +26,8 @@ export class Popup {
   }
 
   setEventListeners() {
-    document.addEventListener("keydown", this._handleEscClose);
-    this.popup.addEventListener("mousedown", this._closeByClick);
+   
+    this._popup.addEventListener("mousedown", this._closeByClick);
   }
 }
 

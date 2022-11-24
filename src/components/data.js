@@ -29,11 +29,11 @@ export const buttonAvatarSubmit = document.querySelector(
 );
 export const buttonAvatarEdit = document.querySelector(".button-avatar");
 export const formAvatar = document.forms.editAvatar;
-export const popupForAvatar = document.querySelector(".popup_type_avatar");
+// export const popupForAvatar = document.querySelector(".popup_type_avatar");
 
 //добавление карточки
 export const cardsContainer = document.querySelector(".cards__list");
-export const popupNewCard = document.querySelector(".popup_type_newcard");
+// export const popupNewCard = document.querySelector(".popup_type_newcard");
 export const buttonOpenPopupCard = document.querySelector(".add-button");
 export const cardNameInput = document.querySelector(".form__item_card_name");
 export const cardLinkInput = document.querySelector(".form__item_card_link");
@@ -41,6 +41,6 @@ export const formForNewCard = document.forms.cardForm;
 export const buttonNewCardSubmit = document.querySelector(".new-card-button");
 
 //зум картинки
-export const popupCardZoom = document.querySelector(".popup_type_zoom");
+// export const popupCardZoom = document.querySelector(".popup_type_zoom");
 export const popupZoomTitle = document.querySelector(".popup__title");
 export const popupZoomImg = document.querySelector(".popup__img");

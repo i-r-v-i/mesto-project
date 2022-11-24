@@ -21,22 +21,13 @@ import {
 } from "./data.js";
 import EnableValidator from "./validate.js";
 import { PopupWithForm } from "./PopupWithForm.js"
+import { PopupWithImage } from "./PopupWithImage.js"
 import { Card } from "./card.js";
 import { Api } from "./api.js";
 import UserInfo from "./UserInfo.js";
 import { Section } from "./Section.js"
 
 const api = new Api(apiConfig);
-
-const cardList = new Section( 
-  { items: api.getInitialCards(),
-    renderer: () => {
-      const cardElement = new Card()
-    }
-
-  })
-
-
 
 function setFormValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -48,6 +39,8 @@ function setFormValidation(config) {
 setFormValidation(enableValidationConfig);
 
 const userInfo = new UserInfo({nameSelector : ".profile__name", aboutSelector: ".profile__activity", avatarSelector: ".profile__avatar"})
+
+const popupZoomCard = new PopupWithImage(card, ".popup_type_zoom");
 
 // const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
 // newCardValidation.enableValidation();
@@ -65,7 +58,7 @@ const popupNewCard = new PopupWithForm({
       .then((dataFromServer) => {
         addToContainer(cardsContainer, dataFromServer, userId);
         popupNewCard.closePopup();
-        
+
       })
       .catch((err) => {
         console.log(
@@ -181,11 +174,40 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
         avatar: userInfoFromServer.avatar
     })
     userId = userInfoFromServer._id;
-    console.log(userId);
-    cardsFromServer.reverse().forEach((card) => {
-      addToContainer(cardsContainer, card, userId);
-    });
-  })
+      const cardList = new Section({
+          items: cardsFromServer,
+          renderer: (card) => {
+              const newCard = new Card({
+                  cardData: card,
+                  handleCardClick: () => {
+
+                  },
+                  handleDeleteCard: () => {
+                      api.deleteCard(newCard.getCardId())
+                          .then(() => {
+                              cardElement.remove();
+                          })
+                          .catch((err) => {
+                              console.log(
+                                  `Что-то пошло не так... Ошибка при удалении карточки: ${err}`
+                              );
+                          });
+                  },
+                  handleChangeLike: () => {
+
+                  },
+              }, '#card')
+          const cardElement = newCard.generateCard(userId);
+          cardList.addItem(cardElement)
+          }
+
+      }, '.cards__list')
+      cardList.renderItems();
+
+    })
+    // cardsFromServer.reverse().forEach((card) => {
+    //   addToContainer(cardsContainer, card, userId);
+    // });
   .catch((err) => {
     console.log(
       `Что-то пошло не так... Ошибка при получении данных с сервера: ${err}`

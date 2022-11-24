@@ -20,27 +20,31 @@ export class Card {
       .querySelector(this._templateSelector)
       .content.querySelector(".card");
     this._cardElement = this._cardTemplate.cloneNode(true);
-    this._cardImage = this._card.querySelector(".card__img");
-    this._cardBin = this._cardElement.querySelector(".card__bin");
-    this._cardLike = this._cardElement.querySelector(".card__like");
-    this._likeCounter = this._cardElement.querySelector(".card__like-count");
-
     return this._cardElement;
   }
 
-  _generateCard(userId) {
+  generateCard(userId) {
     this._card = this._getCard(); //получаем склонированную карточку для заполнения
+
+    this._cardImage = this._card.querySelector(".card__img");
+    this._cardBin = this._card.querySelector(".card__bin");
+    this._cardLike = this._card.querySelector(".card__like");
+    this._likeCounter = this._card.querySelector(".card__like-count");
+
     this._card.querySelector(".card__title").textContent = this._cardName;
     this._cardImage.src = this._cardImageLink;
     this._cardImage.alt = `Фото ${this._cardName}`;
 
-    this.updateLikesStatus(userId);
+    // this.updateLikesStatus(userId);
     this._setBinOnCard(userId);
-    this._setEventListeners(); 
+    this._setEventListeners();
 
     return this._card;
   }
 
+  getCardId(){
+    return this._cardId;
+  }
 
   _setBinOnCard(userId) {
   if (this._cardOwner !== userId) {
@@ -86,11 +90,17 @@ export class Card {
   }
 
   _setDeleteListener() {
-    this._cardBin.addEventListener("click", () => this._handleDeleteCard);
+    this._cardBin.addEventListener("click", () => {
+      this._handleDeleteCard()
+    });
   }
 
   _setLikeListener() {
-    this._cardLike.addEventListener("click", () => this._handleChangeLike);
+    this._cardLike.addEventListener("click", () => {
+      this._handleChangeLike();
+      this._cardLike.classList.toggle(".card__like_active");
+    });
+    
   }
 
   // cardImage.addEventListener("click", () =>
@@ -109,18 +119,18 @@ export class Card {
   // );
 
   _setEventListeners() {
-    this._setZoomListener();
+    // this._setZoomListener();
     this._setDeleteListener();
-    this._setLikeListener();
+    // this._setLikeListener();
   }
 }
 
 
 
-// export function removeCardfromDOM(cardElement) {
-//   cardElement.remove();
-//   cardElement = null;
-// }
+export function removeCardfromDOM(cardElement) {
+  cardElement.remove();
+  cardElement = null;
+}
 
 // function isMyLike(likesArray, userId) {
 //   return Boolean(

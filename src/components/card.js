@@ -10,7 +10,7 @@ export class Card {
     this._cardLikesArray = cardData.likes;
     this._cardId = cardData._id;
     this._cardOwner = cardData.owner._id;
-    // this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
     // this._handleChangeLike = handleChangeLike;
   }
@@ -86,7 +86,7 @@ export class Card {
   }
 
   _setZoomListener() {
-    this._cardImage.addEventListener("click", () => this._handleCardClick);
+    this._cardImage.addEventListener("click", this._handleCardClick);
   }
 
   _setDeleteListener() {
@@ -119,7 +119,7 @@ export class Card {
   // );
 
   _setEventListeners() {
-    // this._setZoomListener();
+    this._setZoomListener();
     this._setDeleteListener();
     // this._setLikeListener();
   }

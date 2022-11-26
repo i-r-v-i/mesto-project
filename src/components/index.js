@@ -40,8 +40,6 @@ setFormValidation(enableValidationConfig);
 
 const userInfo = new UserInfo({nameSelector : ".profile__name", aboutSelector: ".profile__activity", avatarSelector: ".profile__avatar"})
 
-const popupZoomCard = new PopupWithImage(card, ".popup_type_zoom");
-
 // const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
 // newCardValidation.enableValidation();
 
@@ -171,7 +169,11 @@ function addToContainer(items){
 function createCard(data){
     const newCard = new Card({
         cardData: data,
-        // handleCardClick: ,
+        handleCardClick: () => {
+            const popupZoom = new PopupWithImage(data, ".popup_type_zoom");
+            popupZoom.setEventListeners();
+            popupZoom.openPopup();
+        },
         handleDeleteCard: () => {
             handleDeleteCard(newCard, cardElement)
         },

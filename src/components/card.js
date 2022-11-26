@@ -10,9 +10,9 @@ export class Card {
     this._cardLikesArray = cardData.likes;
     this._cardId = cardData._id;
     this._cardOwner = cardData.owner._id;
-    this._handleCardClick = handleCardClick;
+    // this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
-    this._handleChangeLike = handleChangeLike;
+    // this._handleChangeLike = handleChangeLike;
   }
 
   _getCard() {

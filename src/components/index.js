@@ -56,7 +56,7 @@ const popupNewCard = new PopupWithForm({
   handleFormSubmit: () => {
     api.addCard({ link: cardLinkInput.value, name: cardNameInput.value })
       .then((dataFromServer) => {
-        addToContainer(cardsContainer, dataFromServer, userId);
+        addToContainer(dataFromServer).addItem(createCard(dataFromServer));
         popupNewCard.closePopup();
 
       })
@@ -116,10 +116,10 @@ const popupForAvatar = new PopupWithForm({
 })
 popupForAvatar.setEventListeners();
 
-export function removeCardfromDOM(cardElement) {
-  cardElement.remove();
-  cardElement = null;
-}
+// export function removeCardfromDOM(cardElement) {
+//   cardElement.remove();
+//   cardElement = null;
+// }
 // лайки
 export function handleLikeState(cardElement, isLiked, cardId, userId) {
   api.changeLike(isLiked, cardId)
@@ -129,25 +129,6 @@ export function handleLikeState(cardElement, isLiked, cardId, userId) {
     .catch((err) => {
       console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
     });
-}
-
-//удаление карточки из сервера и ДОМ
-export function handleDeleteCard(cardElement, cardId) {
-  api.deleteCard(cardId)
-    .then(() => {
-      removeCardfromDOM(cardElement);
-    })
-    .catch((err) => {
-      console.log(
-        `Что-то пошло не так... Ошибка при удалении карточки: ${err}`
-      );
-    });
-}
-
-//функция добавления разметки карточки в контейнер
-export function addToContainer(container, cardData, userId) {
-  const card = getCard(cardData, userId);
-  container.prepend(card);
 }
 
 //слушатели и установка обработчиков событий
@@ -164,6 +145,42 @@ buttonAvatarEdit.addEventListener("click", () => popupForAvatar.openPopup());
 
 export let userId = null;
 
+function handleDeleteCard(cardInstance, cardElement) {
+    api.deleteCard(cardInstance.getCardId())
+        .then(() => {
+            cardElement.remove();
+        })
+        .catch((err) => {
+            console.log(
+                `Что-то пошло не так... Ошибка при удалении карточки: ${err}`
+            );
+        });
+}
+
+function addToContainer(items){
+    const cardList = new Section({
+        items,
+        renderer: (card) => {
+            cardList.addItem(createCard(card))
+        }
+    }, '.cards__list')
+    return cardList;
+}
+
+
+function createCard(data){
+    const newCard = new Card({
+        cardData: data,
+        // handleCardClick: ,
+        handleDeleteCard: () => {
+            handleDeleteCard(newCard, cardElement)
+        },
+        // handleChangeLike: ,
+    }, '#card')
+    const cardElement = newCard.generateCard(userId);
+    return cardElement;
+}
+
 Promise.all([api.getInitialCards(), api.getInfoProfile()])
   .then(([cardsFromServer, userInfoFromServer]) => {
     userInfo.setUserInfo({
@@ -174,36 +191,7 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
         avatar: userInfoFromServer.avatar
     })
     userId = userInfoFromServer._id;
-      const cardList = new Section({
-          items: cardsFromServer,
-          renderer: (card) => {
-              const newCard = new Card({
-                  cardData: card,
-                  handleCardClick: () => {
-
-                  },
-                  handleDeleteCard: () => {
-                      api.deleteCard(newCard.getCardId())
-                          .then(() => {
-                              cardElement.remove();
-                          })
-                          .catch((err) => {
-                              console.log(
-                                  `Что-то пошло не так... Ошибка при удалении карточки: ${err}`
-                              );
-                          });
-                  },
-                  handleChangeLike: () => {
-
-                  },
-              }, '#card')
-          const cardElement = newCard.generateCard(userId);
-          cardList.addItem(cardElement)
-          }
-
-      }, '.cards__list')
-      cardList.renderItems();
-
+    addToContainer(cardsFromServer).renderItems();
     })
     // cardsFromServer.reverse().forEach((card) => {
     //   addToContainer(cardsContainer, card, userId);

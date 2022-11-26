@@ -5,7 +5,7 @@ import {
   profileJob,
   popupProfile,
   } from "./data.js";
-import { openPopup } from "./modal.js";
+import { Card } from "./card.js";
 
 
 // заполнение полей профиля

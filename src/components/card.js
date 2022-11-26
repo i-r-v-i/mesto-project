@@ -1,7 +1,3 @@
-// import { popupNewCard } from "./index.js";
-import { PopupWithImage } from "./PopupWithImage.js"
-import {handleDeleteCard} from "./index.js";
-
 export class Card {
   constructor( {cardData, handleCardClick, handleDeleteCard, handleChangeLike}, templateSelector) {
     this._templateSelector = templateSelector;
@@ -12,7 +8,7 @@ export class Card {
     this._cardOwner = cardData.owner._id;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
-    // this._handleChangeLike = handleChangeLike;
+    this._handleChangeLike = handleChangeLike;
   }
 
   _getCard() {
@@ -30,12 +26,11 @@ export class Card {
     this._cardBin = this._card.querySelector(".card__bin");
     this._cardLike = this._card.querySelector(".card__like");
     this._likeCounter = this._card.querySelector(".card__like-count");
-
     this._card.querySelector(".card__title").textContent = this._cardName;
     this._cardImage.src = this._cardImageLink;
     this._cardImage.alt = `Фото ${this._cardName}`;
 
-    // this.updateLikesStatus(userId);
+    this.updateLikesStatus(userId);
     this._setBinOnCard(userId);
     this._setEventListeners();
 
@@ -69,10 +64,10 @@ export class Card {
   }
 
   _changeLikeStatus(userId) {
-    if (isMyLike(userId)) {
+    if (this._isMyLike(userId)) {
       this._setLikeActive();
     } else {
-      this. _unsetLikeActive();
+      this._unsetLikeActive();
     }
   }
 
@@ -98,14 +93,11 @@ export class Card {
   _setLikeListener() {
     this._cardLike.addEventListener("click", () => {
       this._handleChangeLike();
-      this._cardLike.classList.toggle(".card__like_active");
+      // this._cardLike.classList.toggle(".card__like_active");
     });
     
   }
 
-  // cardImage.addEventListener("click", () =>
-  //   handleClickImage(cardData, popupCardZoom)
-  // );
   // cardLike.addEventListener("click", () => {
   //   if (cardLike.classList.contains("card__like_active")) {
   //     handleLikeState(cardElement, true, cardData._id, userId);
@@ -113,23 +105,12 @@ export class Card {
   //     handleLikeState(cardElement, false, cardData._id, userId);
   //   }
   // });
-
-  // cardBin.addEventListener("click", () =>
-  //   handleDeleteCard(cardElement, cardData._id)
-  // );
-
+  
   _setEventListeners() {
     this._setZoomListener();
     this._setDeleteListener();
-    // this._setLikeListener();
+    this._setLikeListener();
   }
-}
-
-
-
-export function removeCardfromDOM(cardElement) {
-  cardElement.remove();
-  cardElement = null;
 }
 
 // function isMyLike(likesArray, userId) {

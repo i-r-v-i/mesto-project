@@ -114,15 +114,11 @@ const popupForAvatar = new PopupWithForm({
 })
 popupForAvatar.setEventListeners();
 
-// export function removeCardfromDOM(cardElement) {
-//   cardElement.remove();
-//   cardElement = null;
-// }
 // лайки
-export function handleLikeState(cardElement, isLiked, cardId, userId) {
+function handleLikeState(isLiked, cardId, userId) {
   api.changeLike(isLiked, cardId)
     .then((dataFromServer) => {
-      updateLikesStatus(cardElement, dataFromServer.likes, userId);
+      updateLikesStatus(dataFromServer.likes, userId);
     })
     .catch((err) => {
       console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
@@ -177,7 +173,8 @@ function createCard(data){
         handleDeleteCard: () => {
             handleDeleteCard(newCard, cardElement)
         },
-        // handleChangeLike: ,
+        handleChangeLike: () => { 
+          handleLikeState() },
     }, '#card')
     const cardElement = newCard.generateCard(userId);
     return cardElement;
@@ -193,11 +190,8 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
         avatar: userInfoFromServer.avatar
     })
     userId = userInfoFromServer._id;
-    addToContainer(cardsFromServer).renderItems();
+    addToContainer(cardsFromServer.reverse()).renderItems();
     })
-    // cardsFromServer.reverse().forEach((card) => {
-    //   addToContainer(cardsContainer, card, userId);
-    // });
   .catch((err) => {
     console.log(
       `Что-то пошло не так... Ошибка при получении данных с сервера: ${err}`

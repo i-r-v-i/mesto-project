@@ -115,15 +115,15 @@ const popupForAvatar = new PopupWithForm({
 popupForAvatar.setEventListeners();
 
 // лайки
-function handleLikeState(isLiked, cardId, userId) {
-  api.changeLike(isLiked, cardId)
-    .then((dataFromServer) => {
-      updateLikesStatus(dataFromServer.likes, userId);
-    })
-    .catch((err) => {
-      console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
-    });
-}
+// function handleLikeState(cardInstance, isLiked, userId) {
+//   api.changeLike(isLiked, cardInstance.getCardId())
+//     .then((dataFromServer) => {
+//       cardInstance.updateLikesStatus(dataFromServer.likes, userId);
+//     })
+//     .catch((err) => {
+//       console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
+//     });
+// }
 
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", () => { 
@@ -173,10 +173,23 @@ function createCard(data){
         handleDeleteCard: () => {
             handleDeleteCard(newCard, cardElement)
         },
-        handleChangeLike: () => { 
-          handleLikeState() },
+        handleChangeLike: (isLiked) => {
+           api.changeLike(isLiked, newCard.getCardId())
+          .then((dataFromServer) => {
+            newCard.updateLikesStatus(dataFromServer.likes, userId);
+            if (isLiked) {
+              newCard._unsetLikeActive();
+            } else {
+              newCard._setLikeActive();
+            }
+          })
+          .catch((err) => {
+            console.log(`Что-то пошло не так... Ошибка при добавлении лайка: ${err}`);
+          });
+        },
     }, '#card')
     const cardElement = newCard.generateCard(userId);
+    
     return cardElement;
 }
 

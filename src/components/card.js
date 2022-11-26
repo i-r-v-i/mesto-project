@@ -29,8 +29,8 @@ export class Card {
     this._card.querySelector(".card__title").textContent = this._cardName;
     this._cardImage.src = this._cardImageLink;
     this._cardImage.alt = `Фото ${this._cardName}`;
-
-    this.updateLikesStatus(userId);
+    
+    this._likeCounter.textContent = this._cardLikesArray.length;
     this._setBinOnCard(userId);
     this._setEventListeners();
 
@@ -55,6 +55,8 @@ export class Card {
     );
   }
 
+
+
   _setLikeActive() {
     this._cardLike.classList.add("card__like_active");
   }
@@ -71,12 +73,12 @@ export class Card {
     }
   }
 
-  _updateLikesCount() {
-    this._likeCounter.textContent = this._cardLikesArray.length;
+  _setLikesCount(array) {
+    this._likeCounter.textContent = array.length;
   }
   
-  updateLikesStatus(userId) {
-    this._updateLikesCount();
+  updateLikesStatus(array, userId) {
+    this._setLikesCount(array);
     this._changeLikeStatus(userId);
   }
 
@@ -91,11 +93,16 @@ export class Card {
   }
 
   _setLikeListener() {
-    this._cardLike.addEventListener("click", () => {
-      this._handleChangeLike();
-      // this._cardLike.classList.toggle(".card__like_active");
+    this._cardLike.addEventListener("click", () => { 
+      if (this._cardLike.classList.contains("card__like_active")) {
+        this._handleChangeLike(true);
+        
+     } else {
+      this._handleChangeLike(false);
+     
+    }
+  
     });
-    
   }
 
   // cardLike.addEventListener("click", () => {
@@ -105,7 +112,7 @@ export class Card {
   //     handleLikeState(cardElement, false, cardData._id, userId);
   //   }
   // });
-  
+
   _setEventListeners() {
     this._setZoomListener();
     this._setDeleteListener();

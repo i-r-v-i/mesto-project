@@ -11,9 +11,9 @@ import {
   enableValidationConfig,
   apiConfig,
 } from "./data.js";
-import { EnableValidator } from "./EnableValidator.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
+import { EnableValidator } from "../EnableValidator.js";
+import { PopupWithForm } from "../PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Card } from "./Card.js";
 import { Api } from "./Api.js";
 import { UserInfo } from "./UserInfo.js";

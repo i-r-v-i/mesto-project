@@ -101,15 +101,6 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
-// const newCardValidation = new EnableValidator(enableValidationConfig, '.form[name=cardForm]');
-// newCardValidation.enableValidation();
-
-// const avatarValidation = new EnableValidator(enableValidationConfig, '.form[name=editAvatar]');
-// avatarValidation.enableValidation();
-
-// const profileValidation = new EnableValidator(enableValidationConfig, '.form[name=editProfile]');
-// profileValidation.enableValidation();
-
 const popupNewCard = new PopupWithForm({
   popupSelector: ".popup_type_newcard",
   handleFormSubmit: () => {

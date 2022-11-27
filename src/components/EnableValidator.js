@@ -1,4 +1,4 @@
-export default class EnableValidator {
+export class EnableValidator {
   constructor(config, formElement) {
     this._formSelector = config.formSelector;
     this._errorClass = config.errorClass;
@@ -67,7 +67,7 @@ export default class EnableValidator {
     }
   }
 
-  //Метода навешивания слушателей ввода на поля ввода форм
+  //Метод навешивания слушателей ввода на поля ввода форм
   _setEventListenersForForm() {
     this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
@@ -86,7 +86,6 @@ export default class EnableValidator {
       });
     });
   }
-  
 
   //Метод включения валидации
   enableValidation() {
@@ -94,79 +93,3 @@ export default class EnableValidator {
     };
 }
 
-
-
-// показываем текст ошибки
-// function showInputError(formElement, inputElement, config) {
-//   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-//   inputElement.classList.add(config.errorClass);
-//   errorElement.textContent = inputElement.validationMessage;
-// }
-//
-// //скрываем текст ошибки
-// function hideInputError(formElement, inputElement, config) {
-//   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-//   inputElement.classList.remove(config.errorClass);
-//   errorElement.textContent = inputElement.validationMessage;
-// }
-//
-// export function checkInputValidity(formElement, inputElement, config) {
-//   if (inputElement.validity.patternMismatch) {
-//     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-//   } else {
-//     inputElement.setCustomValidity("");
-//   }
-//   if (!inputElement.validity.valid) {
-//     showInputError(formElement, inputElement, config);
-//   } else {
-//     hideInputError(formElement, inputElement, config);
-//   }
-// }
-
-// function hasInvalidInput(inputList) {
-//   return inputList.some((inputElement) => {
-//     return !inputElement.validity.valid;
-//   });
-// }
-
-// export function setButtonDisabled(buttonElement, config) {
-//   buttonElement.classList.add(config.inactiveButtonClass);
-//   buttonElement.disabled = true;
-// }
-
-// function setButtonActive(buttonElement, config) {
-//   buttonElement.classList.remove(config.inactiveButtonClass);
-//   buttonElement.disabled = false;
-// }
-
-// function toogleButtonState(inputList, buttonElement, config) {
-//   if (hasInvalidInput(inputList)) {
-//     setButtonDisabled(buttonElement, config);
-//   } else {
-//     setButtonActive(buttonElement, config);
-//   }
-// }
-
-// export function setEventListenersForForm(formElement, config) {
-//   const inputList = Array.from(
-//     formElement.querySelectorAll(config.inputSelector)
-//   );
-//   const buttonSubmit = formElement.querySelector(config.buttonSelector);
-//   toogleButtonState(inputList, buttonSubmit, config);
-//   inputList.forEach((inputElement) => {
-//     inputElement.addEventListener("input", () => {
-//       checkInputValidity(formElement, inputElement, config);
-//       toogleButtonState(inputList, buttonSubmit, config);
-//     });
-//   });
-// }
-
-// export function enableValidation(config) {
-//   const formList = Array.from(document.querySelectorAll(config.formSelector));
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener("submit", function (evt) {
-//       evt.preventDefault();
-//     });
-//     setEventListenersForForm(formElement, config);
-//   });
-// }

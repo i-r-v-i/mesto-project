@@ -10,14 +10,14 @@ import {
   cardNameInput,
   enableValidationConfig,
   apiConfig,
-} from "../utils/data.js";
-import { EnableValidator } from "../components/EnableValidator.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
-import { Card } from "../components/Card.js";
-import { Api } from "../components/Api.js";
-import { UserInfo } from "../components/UserInfo.js";
-import { Section } from "../components/Section.js";
+} from "./data.js";
+import { EnableValidator } from "./EnableValidator.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { Card } from "./Card.js";
+import { Api } from "./Api.js";
+import { UserInfo } from "./UserInfo.js";
+import { Section } from "./Section.js";
 
 let userId = null;
 

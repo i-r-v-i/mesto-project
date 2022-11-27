@@ -1,5 +1,5 @@
 import { Popup } from "./Popup.js"
-import { popupZoomTitle, popupZoomImg } from "./data.js"
+import { popupZoomTitle, popupZoomImg } from "../utils/data.js"
 
 export class PopupWithImage extends Popup {
     constructor(data, popupSelector) {

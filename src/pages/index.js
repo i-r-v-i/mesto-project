@@ -3,11 +3,8 @@ import {
   nameInput,
   jobInput,
   buttonAvatarEdit,
-  avatarInput,
   buttonProfileEdit,
   buttonOpenPopupCard,
-  cardLinkInput,
-  cardNameInput,
   enableValidationConfig,
   apiConfig,
   popupZoomTitle,
@@ -52,7 +49,6 @@ function createCard(data) {
     {
       cardData: data,
       handleCardClick: () => {
-          console.log(data)
         popupZoom.setEventListeners();
         popupZoom.openPopup(data);
       },
@@ -79,9 +75,8 @@ function createCard(data) {
     },
     "#card"
   );
-  const cardElement = newCard.generateCard(userId);
+  return newCard.generateCard(userId);
 
-  return cardElement;
 }
 
 const api = new Api(apiConfig);
@@ -101,35 +96,12 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
-// const popupNewCard = new PopupWithForm({
-//   popupSelector: ".popup_type_newcard",
-//   handleFormSubmit: () => {
-//     api
-//       .addCard({ link: cardLinkInput.value, name: cardNameInput.value })
-//       .then((dataFromServer) => {
-//         cardList.addItem(createCard(dataFromServer));
-//         popupNewCard.closePopup();
-//       })
-//       .catch((err) => {
-//         console.log(
-//           `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
-//         );
-//       })
-//       .finally(() => {
-//         popupNewCard.renderLoading(false, "Cоздать");
-//       });
-//   },
-// });
-
 const popupNewCard = new PopupWithForm({
     popupSelector: ".popup_type_newcard",
     handleFormSubmit: (data) => {
-      console.log(data);
        api
         .addCard(data)
         .then((dataFromServer) => {
-
-          console.log(dataFromServer);
           cardList.addItem(createCard(dataFromServer));
           popupNewCard.closePopup();
         })

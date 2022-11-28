@@ -36,18 +36,28 @@ function handleDeleteCard(cardInstance, cardElement) {
     });
 }
 
-function addToContainer(items) {
-  const cardList = new Section(
-    {
-      items,
-      renderer: (card) => {
-        cardList.addItem(createCard(card));
+const cardList = new Section(
+      {
+        renderer: (cards) => {
+          cardList.addItem(createCard(cards));
+        },
       },
-    },
-    ".cards__list"
-  );
-  return cardList;
-}
+      ".cards__list"
+    );
+
+
+// function addToContainer(items) {
+//   const cardList = new Section(
+//     {
+//       items,
+//       renderer: (card) => {
+//         cardList.addItem(createCard(card));
+//       },
+//     },
+//     ".cards__list"
+//   );
+//   return cardList;
+// }
 
 const popupZoom = new PopupWithImage(".popup_type_zoom", popupZoomTitle, popupZoomImg);
 
@@ -111,7 +121,8 @@ const popupNewCard = new PopupWithForm({
     api
       .addCard({ link: cardLinkInput.value, name: cardNameInput.value })
       .then((dataFromServer) => {
-        addToContainer(dataFromServer).addItem(createCard(dataFromServer));
+        // addToContainer(dataFromServer).addItem(createCard(dataFromServer));
+        cardList.addItem(createCard(dataFromServer));
         popupNewCard.closePopup();
       })
       .catch((err) => {
@@ -192,7 +203,7 @@ Promise.all([api.getInitialCards(), api.getInfoProfile()])
       avatar: userInfoFromServer.avatar,
     });
     userId = userInfoFromServer._id;
-    addToContainer(cardsFromServer.reverse()).renderItems();
+    cardList.renderItems(cardsFromServer.reverse());
   })
   .catch((err) => {
     console.log(

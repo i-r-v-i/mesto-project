@@ -42,6 +42,11 @@ export class Card {
     return this._cardId;
   }
 
+  removeCardFromDOM() {
+    this._card.remove();
+    this._card = null;
+  }
+  
   _setBinOnCard(userId) {
   if (this._cardOwner !== userId) {
     this._cardBin.remove();

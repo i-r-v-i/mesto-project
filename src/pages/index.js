@@ -23,11 +23,11 @@ import { Section } from "../components/Section.js";
 
 let userId = null;
 
-function handleDeleteCard(cardInstance, cardElement) {
+function handleDeleteCard(cardInstance) {
   api
     .deleteCard(cardInstance.getCardId())
     .then(() => {
-      cardElement.remove();
+      cardInstance.removeCardFromDOM();
     })
     .catch((err) => {
       console.log(
@@ -71,7 +71,7 @@ function createCard(data) {
         popupZoom.openPopup(data);
       },
       handleDeleteCard: () => {
-        handleDeleteCard(newCard, cardElement);
+        handleDeleteCard(newCard);
       },
       handleChangeLike: (isLiked) => {
         api
@@ -121,7 +121,6 @@ const popupNewCard = new PopupWithForm({
     api
       .addCard({ link: cardLinkInput.value, name: cardNameInput.value })
       .then((dataFromServer) => {
-        // addToContainer(dataFromServer).addItem(createCard(dataFromServer));
         cardList.addItem(createCard(dataFromServer));
         popupNewCard.closePopup();
       })

@@ -183,8 +183,7 @@ popupForAvatar.setEventListeners();
 
 //слушатели и установка обработчиков событий
 buttonProfileEdit.addEventListener("click", () => {
-  let info = {};
-  info = userInfo.getUserInfo();
+  const info = userInfo.getUserInfo();
   nameInput.value = info.name;
   jobInput.value = info.about;
   popupEditPtofile.openPopup();

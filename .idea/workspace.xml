@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7307a1e-06ae-4ed9-9e37-407adba349d0" name="Changes" comment="feat: вынесли создание классов карточки и секции в отдельные функции">
+    <list default="true" id="b7307a1e-06ae-4ed9-9e37-407adba349d0" name="Changes" comment="fix: инстанс попапа с картинкой создается глобально. Педелана логика метода open и класса popupWithImage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PopupWithImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +15,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/components/card.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Card.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/components/UserInfo.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/components/Section.js" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -60,7 +61,7 @@
       <workItem from="1669293737790" duration="15580000" />
       <workItem from="1669456325190" duration="10113000" />
       <workItem from="1669586000784" duration="1050000" />
-      <workItem from="1669619419120" duration="603000" />
+      <workItem from="1669619419120" duration="1961000" />
     </task>
     <task id="LOCAL-00001" summary="feat: сделал класс EnableValidator">
       <created>1669030631043</created>
@@ -97,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669464356819</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: в попапе с картинкой сначала заполняеются поля, потом он открывается">
+      <created>1669620079027</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669620079027</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +128,9 @@
     <MESSAGE value="feat: UserInfo сделали" />
     <MESSAGE value="feat: начали делать инстанс Card и Section/ Реализовали удаление из ДОМ и с сервера" />
     <MESSAGE value="feat: вынесли создание классов карточки и секции в отдельные функции" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: вынесли создание классов карточки и секции в отдельные функции" />
+    <MESSAGE value="fix: в попапе с картинкой сначала заполняеются поля, потом он открывается" />
+    <MESSAGE value="fix: инстанс попапа с картинкой создается глобально. Педелана логика метода open и класса popupWithImage" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: инстанс попапа с картинкой создается глобально. Педелана логика метода open и класса popupWithImage" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

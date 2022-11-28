@@ -10,6 +10,8 @@ import {
   cardNameInput,
   enableValidationConfig,
   apiConfig,
+  popupZoomTitle,
+  popupZoomImg
 } from "../utils/data.js";
 import { EnableValidator } from "../components/EnableValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -47,14 +49,16 @@ function addToContainer(items) {
   return cardList;
 }
 
+const popupZoom = new PopupWithImage(".popup_type_zoom", popupZoomTitle, popupZoomImg);
+
 function createCard(data) {
   const newCard = new Card(
     {
       cardData: data,
       handleCardClick: () => {
-        const popupZoom = new PopupWithImage(data, ".popup_type_zoom");
+          console.log(data)
         popupZoom.setEventListeners();
-        popupZoom.openPopup();
+        popupZoom.openPopup(data);
       },
       handleDeleteCard: () => {
         handleDeleteCard(newCard, cardElement);

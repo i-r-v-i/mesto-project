@@ -1,17 +1,16 @@
 import { Popup } from "./Popup.js"
-import { popupZoomTitle, popupZoomImg } from "../utils/data.js"
 
 export class PopupWithImage extends Popup {
-    constructor(data, popupSelector) {
+    constructor(popupSelector, popupZoomTitle, popupZoomImg) {
         super(popupSelector);
-            this._name = data.name;
-            this._link = data.link;
+        this._popupZoomTitle = popupZoomTitle;
+        this._popupZoomImg = popupZoomImg;
     }
 
-    openPopup() {
-        popupZoomTitle.textContent = this._name;
-        popupZoomImg.src =  this._link;
-        popupZoomImg.alt = this._name;
+    openPopup(data) {
+        this._popupZoomTitle.textContent = data.name;
+        this._popupZoomImg.src =  data.link;
+        this._popupZoomImg.alt = data.name;
         super.openPopup();
     }  
 }

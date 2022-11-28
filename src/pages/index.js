@@ -45,20 +45,6 @@ const cardList = new Section(
       ".cards__list"
     );
 
-
-// function addToContainer(items) {
-//   const cardList = new Section(
-//     {
-//       items,
-//       renderer: (card) => {
-//         cardList.addItem(createCard(card));
-//       },
-//     },
-//     ".cards__list"
-//   );
-//   return cardList;
-// }
-
 const popupZoom = new PopupWithImage(".popup_type_zoom", popupZoomTitle, popupZoomImg);
 
 function createCard(data) {
@@ -115,33 +101,56 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
+// const popupNewCard = new PopupWithForm({
+//   popupSelector: ".popup_type_newcard",
+//   handleFormSubmit: () => {
+//     api
+//       .addCard({ link: cardLinkInput.value, name: cardNameInput.value })
+//       .then((dataFromServer) => {
+//         cardList.addItem(createCard(dataFromServer));
+//         popupNewCard.closePopup();
+//       })
+//       .catch((err) => {
+//         console.log(
+//           `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
+//         );
+//       })
+//       .finally(() => {
+//         popupNewCard.renderLoading(false, "Cоздать");
+//       });
+//   },
+// });
+
 const popupNewCard = new PopupWithForm({
-  popupSelector: ".popup_type_newcard",
-  handleFormSubmit: () => {
-    api
-      .addCard({ link: cardLinkInput.value, name: cardNameInput.value })
-      .then((dataFromServer) => {
-        cardList.addItem(createCard(dataFromServer));
-        popupNewCard.closePopup();
-      })
-      .catch((err) => {
-        console.log(
-          `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
-        );
-      })
-      .finally(() => {
-        popupNewCard.renderLoading(false, "Cоздать");
-      });
-  },
-});
+    popupSelector: ".popup_type_newcard",
+    handleFormSubmit: (data) => {
+      console.log(data);
+       api
+        .addCard(data)
+        .then((dataFromServer) => {
+
+          console.log(dataFromServer);
+          cardList.addItem(createCard(dataFromServer));
+          popupNewCard.closePopup();
+        })
+        .catch((err) => {
+          console.log(
+            `Что-то пошло не так... Ошибка при добвлении новой карточки: ${err}`
+          );
+        })
+        .finally(() => {
+          popupNewCard.renderLoading(false, "Cоздать");
+        });
+    },
+  });
 
 popupNewCard.setEventListeners();
 
 const popupEditPtofile = new PopupWithForm({
   popupSelector: ".popup_type_profile",
-  handleFormSubmit: () => {
+  handleFormSubmit: (data) => {
     api
-      .editProfile({ name: nameInput.value, about: jobInput.value })
+      .editProfile(data)
       .then((res) => {
         userInfo.setUserInfo({ name: res.name, about: res.about });
         popupEditPtofile.closePopup();
@@ -161,9 +170,9 @@ popupEditPtofile.setEventListeners();
 
 const popupForAvatar = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
-  handleFormSubmit: () => {
+  handleFormSubmit: (data) => {
     api
-      .editAvatar({ avatar: avatarInput.value })
+      .editAvatar(data)
       .then((res) => {
         userInfo.setUserAvatar({ avatar: res.avatar });
         popupForAvatar.closePopup();
